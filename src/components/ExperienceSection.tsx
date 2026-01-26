@@ -48,6 +48,7 @@ const certifications = [
   { name: 'Connecting to a MongoDB Database', issuer: 'MongoDB', year: '2024', pdfFile: 'Connecting to a MongoDB Database.pdf' },
   { name: 'MongoDB Transactions', issuer: 'MongoDB', year: '2024', pdfFile: 'MongoDB Transactions.pdf' },
   { name: 'Blockchain in Depth', issuer: 'Infosys Springboard', year: '2024', pdfFile: 'Blockchain in Depth.pdf' },
+  { name: 'Java Full Stack', issuer: 'Wipro TalentNext', year: '2025', pdfFile: 'Wipro_TalentNext_Java_Full_Stack_2025.pdf' },
   { name: 'Software Engineering Job Simulation', issuer: 'Forage', year: '2026', pdfFile: 'Software Engineering Job Simulation.pdf' },
   { name: 'Quantitative Research Job Simulation', issuer: 'Forage', year: '2026', pdfFile: 'Quantitative Research Job Simulation.pdf' },
   { name: 'Investment Banking Job Simulation', issuer: 'Forage', year: '2026', pdfFile: 'Investment Banking Job Simulation.pdf' },
