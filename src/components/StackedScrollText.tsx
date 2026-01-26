@@ -15,6 +15,54 @@ type StackedScrollTextProps<T> = {
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
+type StackedScrollItemProps<T> = {
+  item: T;
+  index: number;
+  itemCount: number;
+  renderItem: (item: T, index: number) => ReactNode;
+  getKey?: (item: T, index: number) => string;
+  scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress'];
+  dimOpacity: number;
+  translatePx: number;
+  overlap: number;
+};
+
+const StackedScrollItem = <T,>({
+  item,
+  index,
+  itemCount,
+  renderItem,
+  getKey,
+  scrollYProgress,
+  dimOpacity,
+  translatePx,
+  overlap,
+}: StackedScrollItemProps<T>) => {
+  const key = getKey ? getKey(item, index) : String(index);
+
+  const safeCount = Math.max(1, itemCount);
+  const start = safeCount <= 1 ? 0 : index / safeCount;
+  const end = safeCount <= 1 ? 1 : (index + 1) / safeCount;
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [start - overlap, start, end, end + overlap],
+    [dimOpacity, 1, 1, dimOpacity]
+  );
+
+  const y = useTransform(
+    scrollYProgress,
+    [start, start + overlap, end - overlap, end],
+    [translatePx, 0, 0, -translatePx]
+  );
+
+  return (
+    <motion.div key={key} className="absolute inset-0 flex items-center" style={{ opacity, y }}>
+      {renderItem(item, index)}
+    </motion.div>
+  );
+};
+
 export const StackedScrollText = <T,>({
   items,
   renderItem,
@@ -43,34 +91,20 @@ export const StackedScrollText = <T,>({
     <div ref={ref} className={className} style={containerStyle}>
       <div className={`sticky top-24 ${stickyClassName ?? ''}`.trim()}>
         <div className="relative h-[70vh]">
-          {items.map((item, i) => {
-            const key = getKey ? getKey(item, i) : String(i);
-
-            const start = itemCount <= 1 ? 0 : i / itemCount;
-            const end = itemCount <= 1 ? 1 : (i + 1) / itemCount;
-
-            const opacity = useTransform(
-              scrollYProgress,
-              [start - overlap, start, end, end + overlap],
-              [dimOpacity, 1, 1, dimOpacity]
-            );
-
-            const y = useTransform(
-              scrollYProgress,
-              [start, start + overlap, end - overlap, end],
-              [translatePx, 0, 0, -translatePx]
-            );
-
-            return (
-              <motion.div
-                key={key}
-                className="absolute inset-0 flex items-center"
-                style={{ opacity, y }}
-              >
-                {renderItem(item, i)}
-              </motion.div>
-            );
-          })}
+          {items.map((item, index) => (
+            <StackedScrollItem
+              key={getKey ? getKey(item, index) : String(index)}
+              item={item}
+              index={index}
+              itemCount={itemCount}
+              renderItem={renderItem}
+              getKey={getKey}
+              scrollYProgress={scrollYProgress}
+              dimOpacity={dimOpacity}
+              translatePx={translatePx}
+              overlap={overlap}
+            />
+          ))}
         </div>
       </div>
     </div>

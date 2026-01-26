@@ -24,6 +24,7 @@ const projects = [
     highlights: [
       'FastAPI API (+ request IDs) with health checks and error handling',
       'Benchmarks with FPS + p50/p95/p99 latency + CPU/RSS memory (JSON reports)',
+      'Performance: ~8–12 FPS on Intel Mac (CPU-only inference)',
       'Reliability: retry/skip policy and low-confidence warnings + summaries',
     ],
     githubUrl: 'https://github.com/girishk03/ai-marine-cleanup-sim',
@@ -214,10 +215,10 @@ const projects = [
   },
   {
     id: 2,
-    title: 'Power Theft Detection System',
+    title: 'Power Theft Detection for Smart Grid Analytics',
     description:
-      'AI-based intrusion detection for smart grid power theft, built as a research/learning project with a dashboard for monitoring and review.',
-    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80',
+      'Time-series anomaly detection system for identifying non-technical losses in smart meter data, with model comparison and evaluation-focused reporting.',
+    image: '/projects/A12CB496-E741-4169-867F-6BB929B1374D_4_5005_c.jpeg',
     technologies: ['Python', 'Random Forest', 'LSTM', 'CNN-LSTM', 'Flask'],
     category: 'AI',
     highlights: ['Compared RF vs LSTM vs CNN-LSTM', 'Flask monitoring dashboard', 'Emphasis on evaluation (ROC/CM) over accuracy-only'],
@@ -253,9 +254,9 @@ const projects = [
     title: 'GlobalCart 360 - E-Commerce Analytics Platform',
     description:
       'End-to-end analytics + backend demo: PostgreSQL star schema, near real-time KPIs, retention analytics, and forecasting with an admin/shop UI.',
-    image: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=800&q=80',
+    image: '/projects/globalcart-360/globalscart/01-welcome-screen.png',
     technologies: ['PostgreSQL', 'FastAPI', 'Docker', 'Python', 'SQL'],
-    category: 'Data',
+    category: 'Data Engineering & Analytics',
     highlights: ['PostgreSQL star schema as single source of truth', 'One-command pipeline + incremental refresh simulation', 'Admin + storefront routes served by FastAPI'],
     githubUrl: 'https://github.com/girishk03/globalscart-transaction-pipeline',
     liveUrl: null,
@@ -286,15 +287,7 @@ const projects = [
   },
 ];
 
-const categories = ['All', 'AI', 'Data'];
-
 export const ProjectsSection = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-
-  const filteredProjects = projects.filter(
-    (project) => activeCategory === 'All' || project.category === activeCategory
-  );
-
   return (
     <section id="projects" className="section-padding">
       <div className="section-container">
@@ -307,26 +300,8 @@ export const ProjectsSection = () => {
           </ScrollLinkedText>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-2">
-          {categories.map((category) => {
-            const isActive = activeCategory === category;
-            const cls = [
-              'px-4 py-2 rounded-full text-sm transition-colors border',
-              isActive
-                ? 'border-foreground text-foreground'
-                : 'border-border text-muted-foreground hover:text-foreground',
-            ].join(' ');
-
-            return (
-              <button key={category} onClick={() => setActiveCategory(category)} className={cls}>
-                {category}
-              </button>
-            );
-          })}
-        </div>
-
         <div className="mt-10 grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <div key={project.id} className="rounded-2xl border border-border bg-card overflow-hidden">
               <div className="h-48 border-b border-border overflow-hidden">
                 <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
@@ -363,7 +338,7 @@ export const ProjectsSection = () => {
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Button variant="outline" size="sm" asChild className="flex-1 min-w-[120px]">
+                  <Button variant="heroOutline" size="sm" asChild className="flex-1 min-w-[140px]">
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-1" />
                       Code
@@ -371,21 +346,19 @@ export const ProjectsSection = () => {
                   </Button>
 
                   {project.id === 1 ? (
-                    <Button variant="outline" size="sm" asChild className="flex-1 min-w-[120px]">
+                    <Button variant="gradient" size="sm" asChild className="flex-1 min-w-[140px]">
                       <Link to="/project/marine-plastic-detection">View Project</Link>
                     </Button>
                   ) : null}
 
                   {project.id === 2 ? (
-                    <Button variant="outline" size="sm" asChild className="flex-1 min-w-[120px]">
-                      <a href="https://smartmeteranomolydetection.lovable.app/" target="_blank" rel="noopener noreferrer">
-                        View Project
-                      </a>
+                    <Button variant="gradient" size="sm" asChild className="flex-1 min-w-[140px]">
+                      <Link to="/project/power-theft-detection">View Project</Link>
                     </Button>
                   ) : null}
 
                   {project.id === 3 ? (
-                    <Button variant="outline" size="sm" asChild className="flex-1 min-w-[120px]">
+                    <Button variant="gradient" size="sm" asChild className="flex-1 min-w-[140px]">
                       <Link to="/project/globalcart-360">View Project</Link>
                     </Button>
                   ) : null}
@@ -394,6 +367,7 @@ export const ProjectsSection = () => {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

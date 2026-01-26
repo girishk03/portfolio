@@ -1,67 +1,66 @@
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, FileText, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ParticleBackground } from './ParticleBackground';
 import { Typewriter } from './Typewriter';
-import { ScrollLinkedText } from './ScrollLinkedText';
 
 export const HeroSection = () => {
   const roles = [
     'Python Developer',
-    'Software Engineer',
-    'AI/ML Enthusiast',
-    'Problem Solver',
+    'Machine Learning Engineer',
+    'Backend Developer',
+    'Data Engineering & Analytics',
   ];
 
   return (
-    <section className="min-h-screen flex items-center">
-      <div className="section-container">
-        <div className="max-w-4xl">
-          <div className="mb-10">
-            <span className="font-mono text-xs tracking-wider uppercase text-muted-foreground">
-              Available for opportunities
-            </span>
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      <div className="absolute inset-0">
+        <ParticleBackground />
+        <div className="absolute inset-0 bg-background/60" />
+      </div>
+
+      <div className="relative z-10 section-container w-full">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="mb-10 flex justify-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/30 px-4 py-2 text-xs text-muted-foreground backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="font-mono tracking-wider">Available for opportunities</span>
+            </div>
           </div>
 
-          <ScrollLinkedText as="h1" className="type-h1">
-            CHALLA VENKATA SAI GIRISH
-          </ScrollLinkedText>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+            Hi, I&apos;m{' '}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              Girish Challa
+            </span>
+          </h1>
 
-          {/* Typewriter Effect */}
-          <div className="mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground h-12">
+          <div className="mt-4 text-xl sm:text-2xl md:text-3xl font-medium text-primary h-9 sm:h-10 md:h-11">
             <Typewriter words={roles} />
           </div>
 
-          {/* Tagline */}
-          <ScrollLinkedText as="p" className="type-body mt-6 max-w-2xl">
-            Entry-level software developer focused on building reliable systems across backend engineering and applied AI.
-          </ScrollLinkedText>
+          <p className="mt-6 mx-auto max-w-2xl text-muted-foreground">
+            Entry-level Software Developer with hands-on experience building{' '}
+            <span className="text-primary">Python</span>-based systems,{' '}
+            <span className="text-primary">ML workflows</span>, and{' '}
+            <span className="text-primary">backend-driven dashboards</span>.
+          </p>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            <ScrollLinkedText as="p" className="text-sm">
-              <span className="font-medium">Applied AI</span> — end-to-end pipelines with measurable performance.
-            </ScrollLinkedText>
-            <ScrollLinkedText as="p" className="text-sm">
-              <span className="font-medium">Engineering quality</span> — testing, benchmarking, and observability.
-            </ScrollLinkedText>
-            <ScrollLinkedText as="p" className="text-sm">
-              <span className="font-medium">Deployment</span> — dockerized runtimes and clean docs.
-            </ScrollLinkedText>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-            <Button variant="outline" size="xl" asChild>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button variant="gradient" size="xl" className="w-full sm:w-72" asChild>
               <a href="#projects">
                 View Projects
                 <ArrowDown className="ml-2 h-5 w-5" />
               </a>
             </Button>
-            <Button variant="outline" size="xl" asChild>
-              <a href="#contact">Contact Me</a>
+            <Button variant="heroOutline" size="xl" className="w-full sm:w-72" asChild>
+              <a href="/girish_resume.pdf" target="_blank" rel="noopener noreferrer">
+                <FileText className="h-5 w-5" />
+                Resume
+              </a>
             </Button>
           </div>
 
-          {/* Social Links */}
-          <div className="mt-10 flex items-center gap-4">
+          <div className="mt-10 flex items-center justify-center gap-4">
             <a
               href="https://github.com/girishk03"
               target="_blank"
@@ -87,6 +86,13 @@ export const HeroSection = () => {
             >
               <Mail size={24} />
             </a>
+          </div>
+
+          <div className="mt-10 text-xs text-muted-foreground">
+            Scroll to see my work
+            <div className="mt-2 flex justify-center">
+              <ArrowDown className="h-4 w-4" />
+            </div>
           </div>
         </div>
       </div>

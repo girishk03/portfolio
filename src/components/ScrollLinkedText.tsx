@@ -18,19 +18,13 @@ export const ScrollLinkedText = ({ children, className, as = 'div' }: ScrollLink
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.1, 0.9, 1],
-    [0.15, 1, 1, 0.15]
-  );
-
-  const color = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    ['#6b7280', '#e5e7eb', '#e5e7eb', '#6b7280']
+    [0.9, 1, 1, 0.9]
   );
 
   const MotionTag = motion.create(as);
 
   return (
-    <MotionTag ref={ref} className={className} style={{ opacity, color }}>
+    <MotionTag ref={ref} className={className} style={{ opacity }}>
       {children}
     </MotionTag>
   );

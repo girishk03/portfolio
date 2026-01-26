@@ -16,7 +16,7 @@ import { ScrollLinkedText } from './ScrollLinkedText';
 const experiences = [
   {
     type: 'work',
-    title: 'Fresher / Entry-Level Candidate',
+    title: 'Entry-Level Software Engineer (Open to Opportunities)',
     company: 'Open to Opportunities',
     period: '2024 - Present',
     description: 'Completed 3 projects and 7 certifications through academic coursework and self-learning. Actively seeking Python Developer / Software Engineer roles.',

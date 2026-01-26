@@ -10,17 +10,20 @@ const skillIcons: Record<string, LucideIcon> = {
   HTML: Globe,
   CSS: Palette,
   Flask: Server,
+  FastAPI: Server,
+  Docker: Server,
   Streamlit: Server,
   'Machine Learning': Brain,
+  'Data Analysis': Brain,
   PyTorch: Brain,
   YOLOv5: Target,
   OpenCV: Target,
   LSTM: Brain,
   'Random Forest': Brain,
   MySQL: Database,
+  PostgreSQL: Database,
   MongoDB: Database,
   'Data Structures': Binary,
-  'Computer Networking': Network,
 };
 
 const brandIcon: Record<string, string> = {
@@ -34,6 +37,7 @@ const brandIcon: Record<string, string> = {
   MongoDB: 'mongodb',
   Flask: 'flask',
   Streamlit: 'streamlit',
+  Docker: 'docker',
   PyTorch: 'pytorch',
   OpenCV: 'opencv',
   GitHub: 'github',
@@ -79,28 +83,18 @@ const SkillIcon = ({ name }: { name: string }) => {
 
 const skillGroups = [
   {
-    title: 'Programming',
-    skills: ['Python', 'Java', 'JavaScript'],
+    title: 'Core',
+    skills: ['Python', 'Machine Learning', 'Data Analysis', 'FastAPI', 'Flask'],
   },
   {
-    title: 'Web & Frameworks',
-    skills: ['HTML', 'CSS', 'Flask', 'Streamlit'],
+    title: 'ML & AI',
+    skills: ['YOLOv5', 'PyTorch', 'LSTM', 'CNN-LSTM', 'Random Forest', 'OpenCV'],
   },
   {
-    title: 'AI / Machine Learning',
-    skills: ['Machine Learning', 'PyTorch', 'YOLOv5', 'OpenCV', 'LSTM', 'Random Forest'],
-  },
-  {
-    title: 'Databases & Tools',
-    skills: ['MySQL', 'PostgreSQL', 'MongoDB'],
-  },
-  {
-    title: 'CS Fundamentals',
-    skills: ['Data Structures', 'Computer Networking'],
+    title: 'Data & Backend',
+    skills: ['PostgreSQL (Star Schema)', 'MySQL', 'MongoDB', 'Docker', 'Streamlit'],
   },
 ];
-
-const skills = Array.from(new Set(skillGroups.flatMap((g) => g.skills)));
 
 export const SkillsSection = () => {
   return (
@@ -121,14 +115,23 @@ export const SkillsSection = () => {
 
         <ScrollReveal delay={0.2}>
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {skills.map((skill) => (
-                <div
-                  key={skill}
-                  className="glass rounded-2xl aspect-square p-4 flex flex-col items-center justify-center gap-3 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_hsl(var(--primary)_/_0.15)]"
-                >
-                  <SkillIcon name={skill} />
-                  <div className="text-sm font-medium text-foreground/90 leading-tight">{skill}</div>
+            <div className="grid gap-10">
+              {skillGroups.map((group) => (
+                <div key={group.title} className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-foreground">{group.title}</h3>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    {group.skills.map((skill) => (
+                      <div
+                        key={`${group.title}-${skill}`}
+                        className="glass rounded-2xl aspect-square p-4 flex flex-col items-center justify-center gap-3 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_hsl(var(--primary)_/_0.15)]"
+                      >
+                        <SkillIcon name={skill} />
+                        <div className="text-sm font-medium text-foreground/90 leading-tight">{skill}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
