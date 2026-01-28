@@ -7,6 +7,9 @@ const skillIcons: Record<string, LucideIcon> = {
   Python: Code2,
   Java: Code2,
   JavaScript: Code2,
+  React: Code2,
+  Git: Code2,
+  GitHub: Code2,
   HTML: Globe,
   CSS: Palette,
   Flask: Server,
@@ -30,8 +33,10 @@ const brandIcon: Record<string, string> = {
   Python: 'python',
   Java: 'java',
   JavaScript: 'javascript',
+  React: 'react',
   HTML: 'html5',
   CSS: 'css3',
+  Git: 'git',
   MySQL: 'mysql',
   PostgreSQL: 'postgresql',
   MongoDB: 'mongodb',
@@ -82,6 +87,10 @@ const SkillIcon = ({ name }: { name: string }) => {
 };
 
 const skillGroups = [
+  {
+    title: 'Web & Tools',
+    skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Git', 'GitHub', 'Java'],
+  },
   {
     title: 'Core',
     skills: ['Python', 'Machine Learning', 'Data Analysis', 'FastAPI', 'Flask'],
