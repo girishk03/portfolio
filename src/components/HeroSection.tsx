@@ -5,10 +5,10 @@ import { Typewriter } from './Typewriter';
 
 export const HeroSection = () => {
   const roles = [
+    'Backend Engineer',
     'Python Developer',
     'Machine Learning Engineer',
-    'Backend Developer',
-    'Data Engineering & Analytics',
+    'FastAPI & PostgreSQL',
   ];
 
   return (
@@ -39,10 +39,10 @@ export const HeroSection = () => {
           </div>
 
           <p className="mt-6 mx-auto max-w-2xl text-muted-foreground">
-            Entry-level Software Developer with hands-on experience building{' '}
-            <span className="text-primary">Python</span>-based systems,{' '}
-            <span className="text-primary">ML workflows</span>, and{' '}
-            <span className="text-primary">backend-driven dashboards</span>.
+            Final-year CS student at Anurag University building production-grade backends with{' '}
+            <span className="text-primary">FastAPI</span>,{' '}
+            <span className="text-primary">PostgreSQL</span>, and{' '}
+            <span className="text-primary">OR-Tools</span>. 5 deployed systems including ML pipelines and constraint optimisers.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -53,37 +53,24 @@ export const HeroSection = () => {
               </a>
             </Button>
             <Button variant="heroOutline" size="xl" className="w-full sm:w-72" asChild>
-              <a href="/girish_resume.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="/girish_resume.pdf" download>
                 <FileText className="h-5 w-5" />
-                Resume
+                Download Resume
               </a>
             </Button>
           </div>
 
           <div className="mt-10 flex items-center justify-center gap-4">
-            <a
-              href="https://github.com/girishk03"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="GitHub"
-            >
+            <a href="https://github.com/girishk03" target="_blank" rel="noopener noreferrer"
+              className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors" aria-label="GitHub">
               <Github size={24} />
             </a>
-            <a
-              href="https://linkedin.com/in/challagirish"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn"
-            >
+            <a href="https://linkedin.com/in/challagirish" target="_blank" rel="noopener noreferrer"
+              className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors" aria-label="LinkedIn">
               <Linkedin size={24} />
             </a>
-            <a
-              href="mailto:saigirishchalla574@gmail.com"
-              className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Email"
-            >
+            <a href="mailto:saigirish050704@gmail.com"
+              className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors" aria-label="Email">
               <Mail size={24} />
             </a>
           </div>

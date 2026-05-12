@@ -4,96 +4,37 @@ import { ScrollReveal } from './ScrollReveal';
 import { ScrollLinkedText } from './ScrollLinkedText';
 
 const skillIcons: Record<string, LucideIcon> = {
-  Python: Code2,
-  Java: Code2,
-  JavaScript: Code2,
-  HTML: Globe,
-  CSS: Palette,
-  Flask: Server,
-  FastAPI: Server,
-  Docker: Server,
-  Streamlit: Server,
-  'Machine Learning': Brain,
-  'Data Analysis': Brain,
-  PyTorch: Brain,
-  YOLOv5: Target,
-  OpenCV: Target,
-  LSTM: Brain,
-  'Random Forest': Brain,
-  MySQL: Database,
-  PostgreSQL: Database,
-  MongoDB: Database,
-  'Data Structures': Binary,
+  Python: Code2, TypeScript: Code2, JavaScript: Code2, SQL: Database, Bash: Code2,
+  FastAPI: Server, Flask: Server, Docker: Server, Render: Server, 'GitHub Actions': Code2,
+  'scikit-learn': Brain, YOLOv5: Target, 'OR-Tools': Brain, NLP: Brain, PyTorch: Brain, OpenCV: Target,
+  PostgreSQL: Database, Redis: Database, MySQL: Database, MongoDB: Database,
+  React: Globe, HTML: Globe, CSS: Palette, Git: Code2, GitHub: Code2,
+  'Data Structures': Binary, Networking: Network,
 };
 
 const brandIcon: Record<string, string> = {
-  Python: 'python',
-  Java: 'java',
-  JavaScript: 'javascript',
-  HTML: 'html5',
-  CSS: 'css3',
-  MySQL: 'mysql',
-  PostgreSQL: 'postgresql',
-  MongoDB: 'mongodb',
-  Flask: 'flask',
-  Streamlit: 'streamlit',
-  Docker: 'docker',
-  PyTorch: 'pytorch',
-  OpenCV: 'opencv',
-  GitHub: 'github',
-};
-
-const localIcon: Record<string, string> = {
-  Java: '/skill-icons/java.png',
-  CSS: '/skill-icons/css.png',
+  Python: 'python', JavaScript: 'javascript', TypeScript: 'typescript',
+  React: 'react', HTML: 'html5', CSS: 'css3', Git: 'git', GitHub: 'github',
+  MySQL: 'mysql', PostgreSQL: 'postgresql', MongoDB: 'mongodb', Redis: 'redis',
+  Flask: 'flask', Docker: 'docker', PyTorch: 'pytorch', OpenCV: 'opencv', FastAPI: 'fastapi',
 };
 
 const SkillIcon = ({ name }: { name: string }) => {
-  const localSrc = localIcon[name];
   const slug = brandIcon[name];
   const [failed, setFailed] = useState(false);
-
-  if (localSrc && !failed) {
-    return (
-      <img
-        src={localSrc}
-        alt=""
-        className="h-10 w-10 object-contain"
-        loading="lazy"
-        onError={() => setFailed(true)}
-      />
-    );
-  }
-
   if (slug && !failed) {
-    return (
-      <img
-        src={`https://cdn.simpleicons.org/${slug}/ffffff`}
-        alt=""
-        className="h-10 w-10"
-        loading="lazy"
-        onError={() => setFailed(true)}
-      />
-    );
+    return <img src={`https://cdn.simpleicons.org/${slug}/ffffff`} alt="" className="h-10 w-10" loading="lazy" onError={() => setFailed(true)} />;
   }
-
   const Icon = skillIcons[name] ?? Code2;
   return <Icon className="h-10 w-10 text-foreground/90" />;
 };
 
 const skillGroups = [
-  {
-    title: 'Core',
-    skills: ['Python', 'Machine Learning', 'Data Analysis', 'FastAPI', 'Flask'],
-  },
-  {
-    title: 'ML & AI',
-    skills: ['YOLOv5', 'PyTorch', 'LSTM', 'CNN-LSTM', 'Random Forest', 'OpenCV'],
-  },
-  {
-    title: 'Data & Backend',
-    skills: ['PostgreSQL (Star Schema)', 'MySQL', 'MongoDB', 'Docker', 'Streamlit'],
-  },
+  { title: 'Languages', skills: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Bash'] },
+  { title: 'Backend & Infra', skills: ['FastAPI', 'Flask', 'Docker', 'GitHub Actions', 'Render'] },
+  { title: 'AI & ML', skills: ['scikit-learn', 'YOLOv5', 'PyTorch', 'OR-Tools', 'NLP', 'OpenCV'] },
+  { title: 'Databases', skills: ['PostgreSQL', 'Redis', 'MySQL', 'MongoDB'] },
+  { title: 'Web & Tools', skills: ['React', 'HTML', 'CSS', 'Git', 'GitHub'] },
 ];
 
 export const SkillsSection = () => {
@@ -101,32 +42,24 @@ export const SkillsSection = () => {
     <section id="skills" className="section-padding relative">
       <div className="section-container">
         <div className="text-center mb-16">
-          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
-            Skills & Expertise
-          </span>
+          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">Skills & Expertise</span>
           <ScrollLinkedText as="h2" className="text-4xl md:text-5xl font-bold mb-6">
-            My
-            <span className="gradient-text"> Skills</span>
+            My<span className="gradient-text"> Tech Stack</span>
           </ScrollLinkedText>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive toolkit built through academic projects and self-learning
+            Built through 5 deployed production systems across backend, ML, and data engineering
           </p>
         </div>
-
         <ScrollReveal delay={0.2}>
           <div className="max-w-6xl mx-auto">
             <div className="grid gap-10">
               {skillGroups.map((group) => (
                 <div key={group.title} className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-foreground">{group.title}</h3>
-                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">{group.title}</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     {group.skills.map((skill) => (
-                      <div
-                        key={`${group.title}-${skill}`}
-                        className="glass rounded-2xl aspect-square p-4 flex flex-col items-center justify-center gap-3 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_hsl(var(--primary)_/_0.15)]"
-                      >
+                      <div key={`${group.title}-${skill}`}
+                        className="glass rounded-2xl aspect-square p-4 flex flex-col items-center justify-center gap-3 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_hsl(var(--primary)_/_0.15)]">
                         <SkillIcon name={skill} />
                         <div className="text-sm font-medium text-foreground/90 leading-tight">{skill}</div>
                       </div>
