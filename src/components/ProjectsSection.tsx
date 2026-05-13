@@ -54,14 +54,14 @@ const projects = [
   {
     id: 5,
     title: 'Smart Marine AI',
-    description: 'YOLOv5-based marine debris detection achieving 92% accuracy. End-to-end pipeline with benchmarking (FPS/latency percentiles), stress testing, and Dockerized FastAPI deployment.',
+    description: 'YOLOv5-based marine debris detection achieving 92% accuracy. End-to-end pipeline with GPS-based autonomous collection simulation, FPS/latency benchmarking, stress testing via Streamlit.',
     image: '/projects/smart-marine/smart-marine-01.png',
-    technologies: ['YOLOv5', 'PyTorch', 'FastAPI', 'OpenCV', 'Docker'],
+    technologies: ['YOLOv5', 'PyTorch', 'Streamlit', 'OpenCV', 'psutil'],
     category: 'Computer Vision',
-    highlights: ['YOLOv5 debris detection, 92% accuracy', 'FPS + p50/p95/p99 latency benchmarks with stress mode', 'Dockerized deployment with FastAPI inference endpoint'],
+    highlights: ['YOLOv5 debris detection, 92% accuracy', 'FPS + p50/p95/p99 latency benchmarks with stress mode', 'GPS-based autonomous collection simulation mode'],
     githubUrl: 'https://github.com/girishk03/smart_marine_project',
     liveUrl: null,
-    caseStudyUrl: '/projects/smart-marine',
+    caseStudyUrl: '/project/smart-marine',
   },
 ];
 
