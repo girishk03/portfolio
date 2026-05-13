@@ -9,6 +9,8 @@ import MarinePlasticDetection from "./pages/MarinePlasticDetection";
 import SmartMarine from "./pages/SmartMarine";
 import PowerTheftDetection from "./pages/PowerTheftDetection";
 import NotFound from "./pages/NotFound";
+import HateSpeechDetection from "./pages/HateSpeechDetection";
+import UniversityTimetabling from "./pages/UniversityTimetabling";
 
 const GlobalCart360 = lazy(() => import("./pages/GlobalCart360"));
 
@@ -52,6 +54,8 @@ const App = () => (
             }
           />
           <Route path="/project/power-theft-detection" element={<PowerTheftDetection />} />
+          <Route path="/project/hate-speech-detection" element={<HateSpeechDetection />} />
+          <Route path="/project/university-timetabling" element={<UniversityTimetabling />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

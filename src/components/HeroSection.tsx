@@ -55,7 +55,7 @@ export const HeroSection = () => {
             <Button variant="heroOutline" size="xl" className="w-full sm:w-72" asChild>
               <a href="/girish_resume.pdf" download>
                 <FileText className="h-5 w-5" />
-                Download Resume
+                View Resume
               </a>
             </Button>
           </div>
