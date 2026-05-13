@@ -24,7 +24,7 @@ const projects = [
     category: 'Optimisation & Backend',
     highlights: ['CP-SAT + LNS solving NP-hard scheduling in <2s', 'FastAPI wrapper with live API endpoint', 'GitHub Pages interactive dashboard'],
     githubUrl: 'https://github.com/girishk03/University-Timetabling-Solver',
-    liveUrl: 'https://university-timetabling-solver.onrender.com',
+    liveUrl: 'https://girishk03.github.io/University-Timetabling-Solver/',
     caseStudyUrl: null,
   },
   {
