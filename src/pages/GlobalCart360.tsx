@@ -472,7 +472,7 @@ const GlobalCart360 = () => {
             <div className="flex flex-wrap gap-3 mt-10">
               <Button variant="outline" asChild>
                 <a
-                  href="https://github.com/girishk03/Globalscart-shop"
+                  href="https://github.com/girishk03/GlobalScart"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -608,6 +608,11 @@ const GlobalCart360 = () => {
                 title="Execution Evidence — Customer Experience"
                 subtitle="System UI snapshots demonstrating implementation"
               />
+              <Button variant="outline" size="sm" asChild className="mt-4">
+                <a href="https://globalscart.onrender.com" target="_blank" rel="noopener noreferrer">
+                  View Customer Shop
+                </a>
+              </Button>
             </div>
             <div className="grid gap-8">
               {customerEvidence.map((image, index) => (
@@ -627,6 +632,11 @@ const GlobalCart360 = () => {
           <div className="grid gap-10 md:grid-cols-[minmax(260px,360px)_1fr] md:gap-16">
             <div className="md:sticky md:top-24 md:self-start">
               <SectionHeader number="07" title="Execution Evidence — Admin System" subtitle="Backend monitoring and analytics" />
+              <Button variant="outline" size="sm" asChild className="mt-4">
+                <a href="https://globalscart.onrender.com/admin/" target="_blank" rel="noopener noreferrer">
+                  View Admin Panel
+                </a>
+              </Button>
             </div>
             <div className="grid gap-8">
               {adminEvidence.map((image, index) => (
@@ -690,7 +700,7 @@ const GlobalCart360 = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <Button variant="outline" asChild>
-              <a href="https://github.com/girishk03/Globalscart-shop" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/girishk03/GlobalScart" target="_blank" rel="noopener noreferrer">
                 <Github className="w-4 h-4 mr-2" />
                 View Code on GitHub
               </a>

@@ -3,7 +3,7 @@ import { Heart, Github, Linkedin, Mail } from 'lucide-react';
 const socialLinks = [
   { icon: Github, href: 'https://github.com/girishk03', label: 'GitHub' },
   { icon: Linkedin, href: 'https://linkedin.com/in/challagirish', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:saigirish050704@gmail.com', label: 'Email' },
+  { icon: Mail, href: 'mailto:saigirishchalla574@gmail.com', label: 'Email' },
 ];
 
 export const Footer = () => {

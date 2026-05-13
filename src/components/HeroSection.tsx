@@ -53,7 +53,7 @@ export const HeroSection = () => {
               </a>
             </Button>
             <Button variant="heroOutline" size="xl" className="w-full sm:w-72" asChild>
-              <a href="/girish_resume.pdf" download>
+              <a href="/girish_resume.pdf" target="_blank" rel="noopener noreferrer">
                 <FileText className="h-5 w-5" />
                 View Resume
               </a>
@@ -69,7 +69,7 @@ export const HeroSection = () => {
               className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors" aria-label="LinkedIn">
               <Linkedin size={24} />
             </a>
-            <a href="mailto:saigirish050704@gmail.com"
+            <a href="mailto:saigirishchalla574@gmail.com"
               className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors" aria-label="Email">
               <Mail size={24} />
             </a>

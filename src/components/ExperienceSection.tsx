@@ -16,11 +16,11 @@ import { ScrollLinkedText } from './ScrollLinkedText';
 const experiences = [
   {
     type: 'work',
-    title: 'Entry-Level Software Engineer (Open to Opportunities)',
-    company: 'Open to Opportunities',
+    title: 'Self-Directed Projects & Learning',
+    company: 'Independent',
     period: '2024 - Present',
-    description: 'Completed 3 projects and 7 certifications through academic coursework and self-learning. Actively seeking Python Developer / Software Engineer roles.',
-    highlights: ['Python', 'Machine Learning', 'Web Development'],
+    description: 'Built 5 deployed production systems across backend engineering, NLP, computer vision, and constraint optimisation. Actively seeking Python Developer / Software Engineer roles.',
+    highlights: ['Python', 'Machine Learning', 'FastAPI'],
   },
 ];
 

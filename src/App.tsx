@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, lazy, useLayoutEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
-import MarinePlasticDetection from "./pages/MarinePlasticDetection";
 import SmartMarine from "./pages/SmartMarine";
 import PowerTheftDetection from "./pages/PowerTheftDetection";
 import NotFound from "./pages/NotFound";
@@ -44,7 +43,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/projects/smart-marine" element={<SmartMarine />} />
-          <Route path="/project/marine-plastic-detection" element={<MarinePlasticDetection />} />
           <Route
             path="/project/globalcart-360"
             element={
