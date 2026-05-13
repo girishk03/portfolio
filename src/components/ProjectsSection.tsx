@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Layers } from 'lucide-react';
+import { ExternalLink, Github, Layers, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollLinkedText } from './ScrollLinkedText';
 
@@ -13,6 +13,7 @@ const projects = [
     highlights: ['Multi-vendor support with JWT authentication', 'Async order processing and real-time inventory', 'Deployed on Render with GitHub Actions CI/CD'],
     githubUrl: 'https://github.com/girishk03/GlobalScart',
     liveUrl: 'https://globalscart.onrender.com',
+    caseStudyUrl: '/project/globalcart-360',
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const projects = [
     highlights: ['CP-SAT + LNS solving NP-hard scheduling in <2s', 'FastAPI wrapper with live API endpoint', 'GitHub Pages interactive dashboard'],
     githubUrl: 'https://github.com/girishk03/University-Timetabling-Solver',
     liveUrl: 'https://university-timetabling-solver.onrender.com',
+    caseStudyUrl: null,
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ const projects = [
     highlights: ['TF-IDF + LinearSVC, 78.5% accuracy on 6,424 samples', 'YouTube comment classifier with toxicity scoring', 'AI polite chatroom with real-time SocketIO moderation'],
     githubUrl: 'https://github.com/girishk03/hate-speech-detection',
     liveUrl: 'https://hate-speech-detection-zqjy.onrender.com',
+    caseStudyUrl: null,
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ const projects = [
     highlights: ['Compared RF vs LSTM vs CNN-LSTM on smart meter data', 'Evaluation-focused: ROC curves, confusion matrices, AUC', 'Live Flask monitoring dashboard on Render'],
     githubUrl: 'https://github.com/girishk03/power-theft-detection-system',
     liveUrl: 'https://power-theft-detection-system.onrender.com',
+    caseStudyUrl: '/project/power-theft-detection',
   },
   {
     id: 5,
@@ -57,6 +61,7 @@ const projects = [
     highlights: ['YOLOv5 debris detection, 92% accuracy', 'FPS + p50/p95/p99 latency benchmarks with stress mode', 'Dockerized deployment with FastAPI inference endpoint'],
     githubUrl: 'https://github.com/girishk03/smart_marine_project',
     liveUrl: null,
+    caseStudyUrl: '/projects/smart-marine',
   },
 ];
 
@@ -97,21 +102,24 @@ export const ProjectsSection = () => {
                     <span key={tech} className="px-2 py-1 rounded bg-muted text-xs text-muted-foreground">{tech}</span>
                   ))}
                 </div>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Button variant="heroOutline" size="sm" asChild className="flex-1 min-w-[120px]">
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Button variant="heroOutline" size="sm" asChild className="flex-1 min-w-[100px]">
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-1" />Code
                     </a>
                   </Button>
-                  {project.liveUrl ? (
-                    <Button variant="gradient" size="sm" asChild className="flex-1 min-w-[120px]">
+                  {project.liveUrl && (
+                    <Button variant="gradient" size="sm" asChild className="flex-1 min-w-[100px]">
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-4 w-4 mr-1" />Live Demo
                       </a>
                     </Button>
-                  ) : (
-                    <Button variant="gradient" size="sm" asChild className="flex-1 min-w-[120px]">
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">View Project</a>
+                  )}
+                  {project.caseStudyUrl && (
+                    <Button variant="heroOutline" size="sm" asChild className="flex-1 min-w-[100px]">
+                      <a href={project.caseStudyUrl}>
+                        <BookOpen className="h-4 w-4 mr-1" />Case Study
+                      </a>
                     </Button>
                   )}
                 </div>
