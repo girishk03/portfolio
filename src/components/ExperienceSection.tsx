@@ -19,7 +19,7 @@ const experiences = [
     title: 'Self-Directed Projects & Learning',
     company: 'Independent',
     period: '2024 - Present',
-    description: 'Built 5 deployed production systems across backend engineering, NLP, computer vision, and constraint optimisation. Actively seeking Python Developer / Software Engineer roles.',
+    description: 'Built five production-style portfolio projects across backend engineering, NLP, computer vision, analytics, and constraint optimisation. Actively seeking entry-level Python Developer / Software Engineer roles.',
     highlights: ['Python', 'Machine Learning', 'FastAPI'],
   },
 ];
@@ -30,7 +30,7 @@ const education = [
     title: 'B.Tech in Computer Science & Engineering',
     company: 'Anurag University',
     period: '2023 - 2026',
-    description: 'Currently pursuing Bachelor of Technology in Computer Science and Engineering. CGPA: 7.1',
+    description: 'Completed Bachelor of Technology in Computer Science and Engineering. CGPA: 7.1',
     highlights: ['Data Structures', 'Algorithms', 'AI/ML'],
   },
   {

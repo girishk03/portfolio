@@ -39,10 +39,10 @@ export const HeroSection = () => {
           </div>
 
           <p className="mt-6 mx-auto max-w-2xl text-muted-foreground">
-            Final-year CS student at Anurag University building production-grade backends with{' '}
+            Computer Science graduate and Python backend developer building production-style systems with{' '}
             <span className="text-primary">FastAPI</span>,{' '}
             <span className="text-primary">PostgreSQL</span>, and{' '}
-            <span className="text-primary">OR-Tools</span>. 5 deployed systems including ML pipelines and constraint optimisers.
+            <span className="text-primary">OR-Tools</span>. Five portfolio projects spanning backend engineering, optimization, NLP, analytics, and computer vision.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">

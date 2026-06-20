@@ -23,13 +23,13 @@ export const AboutSection = () => {
         <div className="max-w-4xl mx-auto">
           <div className="space-y-6">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a <span className="text-foreground font-medium">final-year CS student</span> at Anurag University, Hyderabad, focused on backend engineering, machine learning, and constraint optimisation. I build systems end-to-end — from data and models to APIs, dashboards, and CI/CD pipelines.
+              I'm a <span className="text-foreground font-medium">Computer Science graduate and fresher</span> based in Hyderabad, focused on Python backend engineering, applied machine learning, and constraint optimisation. I build systems end-to-end — from data and models to APIs, dashboards, tests, and CI/CD pipelines.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
               I built <span className="text-primary">GlobalScart</span>, a production e-commerce backend with FastAPI, PostgreSQL, Redis, and Docker — deployed live on Render with a full CI/CD pipeline. I also built a <span className="text-primary">University Timetabling Solver</span> using OR-Tools CP-SAT + Large Neighbourhood Search that solves NP-hard scheduling problems in under 2 seconds.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              On the ML side, I built a <span className="text-primary">Hate Speech Detection</span> system (TF-IDF + LinearSVC, 78.5% accuracy on 6,424 samples) with a live YouTube comment classifier and AI polite chatroom, a <span className="text-primary">Power Theft Detection</span> system comparing Random Forest, LSTM, and CNN-LSTM on smart meter data, and a <span className="text-primary">Smart Marine AI</span> debris detector using YOLOv5 achieving 92% accuracy.
+              On the applied-ML side, I built a <span className="text-primary">Hate Speech Detection</span> system using TF-IDF and LinearSVC, a <span className="text-primary">Power Theft Detection</span> dashboard using transparent heuristic risk scoring, and a <span className="text-primary">Smart Marine AI</span> prototype using YOLOv8n with human-review and provenance limitations documented explicitly.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Strong foundation in data structures, algorithms, computer networking, and system design. I prioritise evaluation, observability, and deployment-readiness — not just training models in notebooks.
