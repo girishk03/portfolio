@@ -117,42 +117,42 @@ const PowerTheftDetection = () => {
 
   const objectives = [
     "Build a smart grid monitoring system with heuristic risk scoring",
-    "Compare Random Forest, LSTM, and CNN-LSTM on smart meter data",
-    "Implement evaluation-focused reporting with ROC curves and confusion matrices",
-    "Deploy a live interactive Flask dashboard on Render",
-    "Design modular ML-ready architecture for future inference pipeline",
+    "Implement transparent heuristic risk scoring for investigation prioritization",
+    "Document data quality, missing readings, and label distribution",
+    "Validate Flask routes, real-data sampling, and container builds in CI",
+    "Keep future ML work separate from the implemented risk-scoring behavior",
   ];
 
   const flowSteps = [
-    { title: "Smart Meter Data Input", description: "2,350 simulated customers with hourly consumption readings (2015–2025)" },
+    { title: "Smart Meter Data Input", description: "Simulated mode by default or the first 1,000 rows of the documented 2015 dataset" },
     { title: "Heuristic Risk Scoring", description: "HIGH/MEDIUM/LOW risk scoring based on consumption patterns and anomaly thresholds" },
-    { title: "ML Model Comparison", description: "Random Forest, LSTM, and CNN-LSTM trained and evaluated on the same dataset" },
-    { title: "Evaluation Reporting", description: "ROC curves, confusion matrices, AUC scores generated for each model" },
-    { title: "Dashboard Visualisation", description: "Year-over-year comparison (2015–2025), real-time alerts, and power flow simulation" },
-    { title: "Live Deployment", description: "Flask app deployed on Render with Gunicorn for production serving" },
+    { title: "Risk Categorization", description: "Transparent thresholds assign high, medium, or lower-priority investigation status" },
+    { title: "Data-Quality Reporting", description: "Documents missing readings, label distribution, and source/license uncertainty" },
+    { title: "Dashboard Visualisation", description: "Displays customer risk scores and supporting consumption summaries" },
+    { title: "Deployment Configuration", description: "Flask and Gunicorn startup with Docker and GitHub Actions validation" },
   ];
 
   const designDecisions = [
-    { decision: "Heuristic scoring alongside ML models", reason: "Heuristic rules provide interpretable baselines; ML models add predictive power — comparing both demonstrates engineering maturity" },
-    { decision: "CNN-LSTM hybrid architecture", reason: "CNN layers extract local temporal patterns; LSTM captures long-range dependencies — ideal for smart meter time-series data" },
-    { decision: "Evaluation-first approach", reason: "ROC curves, confusion matrices, and AUC scores prioritised over raw accuracy — prevents misleading results on imbalanced datasets" },
+    { decision: "Heuristic scoring instead of unsupported ML", reason: "Transparent rules match the included implementation and avoid claiming unavailable training or evaluation evidence" },
+    { decision: "Investigation prioritization", reason: "Risk scores support analyst review rather than claiming definitive theft classification" },
+    { decision: "Data-quality-first reporting", reason: "Missing readings, label imbalance, and provenance uncertainty are documented before interpreting dashboard output" },
     { decision: "Flask + Gunicorn on Render", reason: "Lightweight deployment stack suitable for a monitoring dashboard without heavyweight infrastructure" },
   ];
 
   const limitations = [
     "Simulated dataset — not validated on real utility smart meter data",
     "No live data ingestion — dashboard uses pre-computed results",
-    "LSTM training requires GPU for production-scale datasets",
+    "No trained theft-classification model or reproducible ML evaluation is included",
     "Heuristic thresholds manually tuned — not learned from data",
     "No real-time alerting system or notification pipeline",
   ];
 
   const learnings = [
-    "Time-series anomaly detection with LSTM and CNN-LSTM architectures",
-    "Evaluation discipline — ROC/AUC analysis on imbalanced datasets",
+    "Transparent consumption-feature and threshold analysis",
+    "Data-quality reporting for incomplete and imbalanced datasets",
     "Smart grid domain knowledge — consumption patterns and theft signatures",
     "Flask dashboard design for operational monitoring use cases",
-    "Comparing classical ML (Random Forest) vs deep learning (LSTM) systematically",
+    "Testing data loading, API behavior, and risk-category boundaries",
   ];
 
   const evidence = [
@@ -169,10 +169,10 @@ const PowerTheftDetection = () => {
           <div className="max-w-4xl">
             <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Power Theft Detection</h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-              Smart grid monitoring system comparing Random Forest, LSTM, and CNN-LSTM on smart meter data. Heuristic risk scoring across 2,350 simulated customers with a live Flask dashboard.
+              Flask dashboard for heuristic electricity-risk scoring and investigation prioritization. It defaults to simulated data and can sample the first 1,000 rows of the documented 2015 dataset.
             </p>
             <div className="flex flex-wrap gap-2 mt-10">
-              {["Python","Flask","Random Forest","LSTM","CNN-LSTM","Pandas","Gunicorn","Render"].map(t=>(
+              {["Python","Flask","Heuristic Scoring","Pandas","pytest","Docker","Gunicorn","Render"].map(t=>(
                 <span key={t} className="font-mono text-xs text-muted-foreground px-3 py-1.5 rounded-full border border-border">{t}</span>
               ))}
             </div>
@@ -203,10 +203,10 @@ const PowerTheftDetection = () => {
         <section>
           <SectionHeader number="03" title="System Architecture" subtitle="Layered monitoring design" />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ArchCard title="Data Pipeline" icon={<Database className="w-5 h-5"/>} items={["2,350 simulated customers","Hourly consumption readings","2015–2025 time range","Anomaly labelling"]} accent="primary"/>
-            <ArchCard title="ML Models" icon={<Cpu className="w-5 h-5"/>} items={["Random Forest baseline","LSTM time-series model","CNN-LSTM hybrid","Side-by-side evaluation"]} accent="accent"/>
-            <ArchCard title="Evaluation" icon={<BarChart2 className="w-5 h-5"/>} items={["ROC curves per model","Confusion matrices","AUC scoring","Imbalanced dataset handling"]} accent="terminal"/>
-            <ArchCard title="Dashboard" icon={<Shield className="w-5 h-5"/>} items={["Heuristic risk scoring","Year-over-year comparison","Real-time alerts","Power flow simulation"]} accent="primary"/>
+            <ArchCard title="Data Pipeline" icon={<Database className="w-5 h-5"/>} items={["Simulated mode by default","First 1,000 real-data rows","2015 daily readings","Missing-value handling"]} accent="primary"/>
+            <ArchCard title="Risk Engine" icon={<Cpu className="w-5 h-5"/>} items={["Consumption features","Transparent thresholds","Risk-score clamp","Priority categories"]} accent="accent"/>
+            <ArchCard title="Validation" icon={<BarChart2 className="w-5 h-5"/>} items={["30 automated tests","API route coverage","Real-data sampling","Docker build validation"]} accent="terminal"/>
+            <ArchCard title="Dashboard" icon={<Shield className="w-5 h-5"/>} items={["Heuristic risk scoring","Customer prioritization","Consumption summaries","Analyst review workflow"]} accent="primary"/>
           </div>
         </section>
         <section>
@@ -216,18 +216,18 @@ const PowerTheftDetection = () => {
           </div>
         </section>
         <section>
-          <SectionHeader number="05" title="Model Results" subtitle="Evaluation metrics comparison" />
+          <SectionHeader number="05" title="Data Scope" subtitle="Documented runtime boundaries" />
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <div className="flex items-start gap-4 mb-4">
                 <Zap className="w-8 h-8 text-accent flex-shrink-0"/>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">ML Model Comparison</h3>
-                  <p className="text-muted-foreground mt-2">All three models evaluated on the same 2,350-customer smart meter dataset.</p>
+                  <h3 className="text-lg font-semibold text-foreground">2015 Customer Dataset</h3>
+                  <p className="text-muted-foreground mt-2">The repository documents 9,957 customer rows and 365 daily columns; runtime real-data mode samples the first 1,000 rows.</p>
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 mt-4">
-                {[{label:"Customers",value:"2,350"},{label:"Models Compared",value:"3"},{label:"Years of Data",value:"10"}].map(m=>(
+                {[{label:"Customer Rows",value:"9,957"},{label:"Runtime Sample",value:"1,000"},{label:"Dataset Period",value:"2015"}].map(m=>(
                   <div key={m.label} className="rounded-lg border border-border bg-muted/10 p-4 text-center">
                     <div className="text-2xl font-bold text-primary">{m.value}</div>
                     <div className="text-xs text-muted-foreground mt-1">{m.label}</div>

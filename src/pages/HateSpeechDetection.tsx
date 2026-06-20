@@ -119,7 +119,7 @@ const HateSpeechDetection = () => {
     "Build an NLP classifier that generalises across hate speech and clean text",
     "Create a live YouTube comment analyser with toxicity scoring",
     "Implement real-time AI chatroom moderation via SocketIO",
-    "Deploy a production-ready Flask app with CI/CD on Render",
+    "Package Flask interfaces with smoke-tested CI and documented deployment limits",
     "Achieve balanced Macro F1 across both classes, not just accuracy",
   ];
 
@@ -200,7 +200,7 @@ const HateSpeechDetection = () => {
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <p className="text-lg text-foreground leading-relaxed">Online hate speech is growing faster than manual moderation can handle. YouTube comment sections, chatrooms, and social feeds generate millions of messages daily that no human team can review.</p>
-              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Hate Speech Detection</strong> was built to demonstrate a <span className="text-primary">deployable NLP classifier</span> with <span className="text-accent"> real-time chatroom moderation</span> and a <span className="text-terminal"> live YouTube comment analyser</span> — not just a notebook experiment.</p>
+              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Hate Speech Detection</strong> demonstrates a <span className="text-primary">lightweight NLP classification workflow</span> with <span className="text-accent"> SocketIO chatroom assistance</span> and a <span className="text-terminal"> YouTube comment-analysis interface</span>, with human review required for moderation decisions.</p>
             </div>
           </div>
         </section>
@@ -294,7 +294,7 @@ const HateSpeechDetection = () => {
               <span className="font-mono text-xs text-primary uppercase tracking-wider">Final Statement</span>
             </div>
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "Hate Speech Detection is not just a classifier — it is a <span className="text-primary font-medium">deployable moderation system</span> with real-time chatroom integration and live YouTube analysis."
+              "Hate Speech Detection is a moderation-assistance prototype combining a verified classifier with Flask interfaces while documenting dataset licensing, privacy, and human-review limitations."
             </blockquote>
           </div>
         </section>

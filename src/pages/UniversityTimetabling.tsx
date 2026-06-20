@@ -194,7 +194,7 @@ const UniversityTimetabling = () => {
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <p className="text-lg text-foreground leading-relaxed">University scheduling is NP-hard. With hundreds of courses, limited rooms, and thousands of student enrolments, even small constraint violations cascade into timetable failures that affect entire cohorts.</p>
-              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">University Timetabling Solver</strong> was built to demonstrate a <span className="text-primary">production-grade CP-SAT solver</span> that <span className="text-accent"> detects infeasibility automatically</span> and <span className="text-terminal"> generates optimal hybrid schedules</span> in under 2 seconds — benchmarked against ITC-2019 international standards.</p>
+              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">University Timetabling Solver</strong> demonstrates a <span className="text-primary">hybrid CP-SAT and LNS workflow</span> that <span className="text-accent"> detects infeasibility</span>, generates feasible schedules, and validates hard constraints on included examples.</p>
             </div>
           </div>
         </section>
@@ -276,7 +276,7 @@ const UniversityTimetabling = () => {
               <span className="font-mono text-xs text-primary uppercase tracking-wider">Final Statement</span>
             </div>
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "University Timetabling Solver is not a toy optimizer — it is a <span className="text-primary font-medium">production-grade CP-SAT system</span> benchmarked against international standards and deployed with a live interactive dashboard."
+              "University Timetabling Solver is an interview-ready optimization project with explicit constraints, infeasibility diagnostics, automated tests, and an interactive dashboard."
             </blockquote>
           </div>
         </section>
