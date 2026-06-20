@@ -1,72 +1,79 @@
-# Portfolio
+# Girish Challa — Developer Portfolio
 
-## Project info
+[![CI](https://github.com/girishk03/portfolio/actions/workflows/ci.yml/badge.svg?branch=vercel-deploy)](https://github.com/girishk03/portfolio/actions/workflows/ci.yml)
+[![Live](https://img.shields.io/badge/Live-Vercel-black?logo=vercel)](https://girish-challa-portfolio.vercel.app/)
+[![License](https://img.shields.io/badge/Code-MIT-yellow)](LICENSE)
 
-**URL**: https://girishk03.github.io/portfolio
+Personal engineering portfolio for Girish Challa, a Python backend developer and final-year computer science student. The site presents selected backend, optimization, NLP, analytics, and computer-vision projects through interactive case studies.
 
-## How can I edit this code?
+## Live Site
 
-There are several ways of editing your application.
+[girish-challa-portfolio.vercel.app](https://girish-challa-portfolio.vercel.app/)
 
-**Use your preferred IDE**
+## Featured Work
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Vercel.
+- **GlobalScart 360** — FastAPI commerce backend with authentication, checkout, PostgreSQL, analytics, Docker, and CI.
+- **University Timetabling Solver** — Hybrid CP-SAT and LNS scheduling optimizer.
+- **Hate Speech Detection** — TF-IDF and LinearSVC classifier with Flask moderation interfaces.
+- **Power Theft Detection** — Heuristic electricity-risk prioritization dashboard.
+- **Smart Marine AI** — YOLOv8n and Streamlit marine-debris detection prototype with software vessel simulation.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Detailed performance, provenance, and limitation claims belong to each linked project repository and take precedence over portfolio summaries.
 
-Follow these steps:
+## Tech Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+| Area | Technologies |
+| --- | --- |
+| Frontend | React, TypeScript, Vite |
+| UI | Tailwind CSS, shadcn/ui, Radix UI |
+| Motion and visualization | Framer Motion, Recharts |
+| Testing | Vitest, Testing Library |
+| Quality | TypeScript, ESLint configuration |
+| Deployment | Vercel |
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Local Development
 
-# Step 3: Install the necessary dependencies.
-npm i
+Prerequisite: Node.js 20 or later.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+git clone https://github.com/girishk03/portfolio.git
+cd portfolio
+git switch vercel-deploy
+npm ci
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open the local URL printed by Vite.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Validation
 
-**Use GitHub Codespaces**
+```bash
+npm run test
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+GitHub Actions runs tests and the production build on pushes and pull requests targeting `vercel-deploy`. ESLint is configured, but existing case-study typing errors must be resolved before lint can become a required CI check.
 
-## What technologies are used for this project?
+## Project Structure
 
-This project is built with:
+```text
+src/
+├── components/      Shared portfolio sections and UI components
+├── pages/           Home page and project case studies
+├── hooks/           Reusable React hooks
+├── lib/             Shared utilities
+└── test/            Vitest setup and tests
+public/              Resume, certificates, and static project assets
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Deployment
 
-## How can I deploy this project?
+The production site is deployed on Vercel from the `vercel-deploy` branch. Vite produces the static application in `dist/`:
 
-Deploy on Vercel:
-1. Import your GitHub repo into Vercel.
-2. Framework preset: Vite.
-3. Build Command: `npm run build`.
-4. Output Directory: `dist`.
-5. Deploy.
+```bash
+npm run build
+```
 
-## Can I connect a custom domain to my project?
+## License
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://vercel.com/docs/concepts/projects/custom-domains)
+Project-authored source code is available under the [MIT License](LICENSE). Resume content, certificates, screenshots, logos, and third-party assets retain their respective rights and are not relicensed by the MIT grant.
