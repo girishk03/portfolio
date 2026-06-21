@@ -3,10 +3,10 @@ import { ScrollReveal } from './ScrollReveal';
 import { ScrollLinkedText } from './ScrollLinkedText';
 
 const highlights = [
-  { icon: Brain, title: 'AI & ML', description: 'YOLOv8, scikit-learn, NLP, TF-IDF' },
-  { icon: Code2, title: 'Backend', description: 'FastAPI, Flask, PostgreSQL, Redis' },
-  { icon: Database, title: 'Data Engineering', description: 'Star schema, pipelines, OR-Tools' },
-  { icon: Zap, title: '5 Live Systems', description: 'All deployed on Render with CI/CD' },
+  { icon: Code2, title: 'Backend Engineering', description: 'FastAPI, Flask, PostgreSQL, JWT, RBAC' },
+  { icon: Zap, title: 'API Development', description: 'REST APIs, validation, testing, and error handling' },
+  { icon: Brain, title: 'Optimization Systems', description: 'OR-Tools CP-SAT, LNS, and constraint validation' },
+  { icon: Database, title: '5 Portfolio Projects', description: 'Backend, optimization, NLP, analytics, and CV' },
 ];
 
 export const AboutSection = () => {
@@ -17,22 +17,16 @@ export const AboutSection = () => {
         <div className="text-center mb-16">
           <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">About Me</span>
           <ScrollLinkedText as="h2" className="text-4xl md:text-5xl font-bold mb-6">
-            Passionate About<span className="gradient-text"> Technology</span>
+            Backend Engineering<span className="gradient-text"> & Applied AI</span>
           </ScrollLinkedText>
         </div>
         <div className="max-w-4xl mx-auto">
           <div className="space-y-6">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a <span className="text-foreground font-medium">Computer Science graduate and fresher</span> based in Hyderabad, focused on Python backend engineering, applied machine learning, and constraint optimisation. I build systems end-to-end — from data and models to APIs, dashboards, tests, and CI/CD pipelines.
+              I'm a <span className="text-foreground font-medium">Computer Science graduate and Python backend developer</span> based in Hyderabad. I build APIs and backend systems with FastAPI, Flask, PostgreSQL, Docker, automated tests, and GitHub Actions.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I built <span className="text-primary">GlobalScart</span>, a production-style e-commerce backend with FastAPI, PostgreSQL, Docker, and CI. I also built a <span className="text-primary">University Timetabling Solver</span> using OR-Tools CP-SAT + Large Neighbourhood Search with infeasibility diagnostics and hard-constraint validation.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              On the applied-ML side, I built a <span className="text-primary">Hate Speech Detection</span> system using TF-IDF and LinearSVC, a <span className="text-primary">Power Theft Detection</span> dashboard using transparent heuristic risk scoring, and a <span className="text-primary">Smart Marine AI</span> prototype using YOLOv8n with human-review and provenance limitations documented explicitly.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Strong foundation in data structures, algorithms, computer networking, and system design. I prioritise evaluation, observability, and deployment-readiness — not just training models in notebooks.
+              My work includes <span className="text-primary">GlobalScart</span>, a transactional commerce backend, and a <span className="text-primary">University Timetabling Solver</span> using CP-SAT and LNS. I also apply backend engineering to NLP, analytics, and computer-vision prototypes while documenting evidence, limitations, and human-review boundaries.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-8">
               {highlights.map((item) => (
