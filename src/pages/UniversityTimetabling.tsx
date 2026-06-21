@@ -119,7 +119,7 @@ const UniversityTimetabling = () => {
     "Formulate university scheduling as a Constraint Programming problem",
     "Detect and repair infeasible timetables automatically",
     "Achieve Quality Score 100 on ITC-2019 benchmark instances",
-    "Solve NP-hard scheduling in under 2 seconds",
+    "Solve the included sample quickly while exposing configurable time budgets for larger instances",
     "Build a live interactive dashboard for results visualization",
     "Deploy a FastAPI wrapper for programmatic access",
   ];
@@ -173,7 +173,7 @@ const UniversityTimetabling = () => {
           <div className="max-w-4xl">
             <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">University Timetabling Solver</h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-              Hybrid CP-SAT + LNS optimizer that detects infeasible university timetables and auto-generates feasible schedules. Quality Score 100 on ITC-2019 benchmarks. Solves in under 2 seconds.
+              Hybrid CP-SAT + LNS optimizer that detects infeasible university timetables and generates feasible schedules. The included solution artifact reports Quality Score 100; this is sample-specific, not a general benchmark.
             </p>
             <div className="flex flex-wrap gap-2 mt-10">
               {["OR-Tools","CP-SAT","LNS","FastAPI","Python","ITC-2019","GitHub Pages"].map(t=>(

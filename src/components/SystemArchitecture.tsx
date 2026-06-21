@@ -3,7 +3,7 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 const SystemArchitecture = () => {
   const steps = [
     { label: "Input Source", description: "Video / Webcam / Image", color: "bg-primary/20 border-primary/40" },
-    { label: "YOLOv5m Detection", description: "21.2M params, 640×640", color: "bg-accent border-accent-foreground/20" },
+    { label: "YOLOv8n Runtime", description: "Debris-proxy candidate detection", color: "bg-accent border-accent-foreground/20" },
     { label: "Frame Processing", description: "OpenCV pipeline", color: "bg-accent border-accent-foreground/20" },
     { label: "Visualization", description: "Bounding boxes + scores", color: "bg-primary/20 border-primary/40" },
   ];

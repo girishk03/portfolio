@@ -3,7 +3,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { ScrollLinkedText } from './ScrollLinkedText';
 
 const highlights = [
-  { icon: Brain, title: 'AI & ML', description: 'YOLOv5, scikit-learn, NLP, TF-IDF' },
+  { icon: Brain, title: 'AI & ML', description: 'YOLOv8, scikit-learn, NLP, TF-IDF' },
   { icon: Code2, title: 'Backend', description: 'FastAPI, Flask, PostgreSQL, Redis' },
   { icon: Database, title: 'Data Engineering', description: 'Star schema, pipelines, OR-Tools' },
   { icon: Zap, title: '5 Live Systems', description: 'All deployed on Render with CI/CD' },
@@ -26,7 +26,7 @@ export const AboutSection = () => {
               I'm a <span className="text-foreground font-medium">Computer Science graduate and fresher</span> based in Hyderabad, focused on Python backend engineering, applied machine learning, and constraint optimisation. I build systems end-to-end — from data and models to APIs, dashboards, tests, and CI/CD pipelines.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I built <span className="text-primary">GlobalScart</span>, a production e-commerce backend with FastAPI, PostgreSQL, Redis, and Docker — deployed live on Render with a full CI/CD pipeline. I also built a <span className="text-primary">University Timetabling Solver</span> using OR-Tools CP-SAT + Large Neighbourhood Search that solves NP-hard scheduling problems in under 2 seconds.
+              I built <span className="text-primary">GlobalScart</span>, a production-style e-commerce backend with FastAPI, PostgreSQL, Docker, and CI. I also built a <span className="text-primary">University Timetabling Solver</span> using OR-Tools CP-SAT + Large Neighbourhood Search with infeasibility diagnostics and hard-constraint validation.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
               On the applied-ML side, I built a <span className="text-primary">Hate Speech Detection</span> system using TF-IDF and LinearSVC, a <span className="text-primary">Power Theft Detection</span> dashboard using transparent heuristic risk scoring, and a <span className="text-primary">Smart Marine AI</span> prototype using YOLOv8n with human-review and provenance limitations documented explicitly.
