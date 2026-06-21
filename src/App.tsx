@@ -42,6 +42,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/project/smart-marine" element={<SmartMarine />} />
           <Route path="/projects/smart-marine" element={<SmartMarine />} />
           <Route
             path="/project/globalcart-360"

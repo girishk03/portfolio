@@ -301,9 +301,27 @@ const GlobalCart360 = () => {
     { title: "Order Completion", description: "Order status updated based on payment response" },
   ];
 
+  const apiEndpoints = [
+    { method: "POST", path: "/api/auth/login", purpose: "Authenticate a customer and begin the OTP/JWT flow" },
+    { method: "GET", path: "/api/customer/products", purpose: "Browse and filter the product catalog" },
+    { method: "PUT", path: "/api/customer/cart", purpose: "Synchronize customer cart quantities" },
+    { method: "POST", path: "/api/customer/checkout/start", purpose: "Validate checkout, create an order, and reserve inventory" },
+    { method: "POST", path: "/api/payments/razorpay/confirm", purpose: "Verify payment confirmation and finalize order state" },
+    { method: "GET", path: "/api/admin/kpis/latest", purpose: "Return protected operational KPI data" },
+  ];
+
+  const schemaEntities = [
+    { name: "dim_customer", detail: "Customer identity and geography", relation: "1 → many orders" },
+    { name: "dim_product", detail: "Catalog, category, price, and cost", relation: "1 → many order items" },
+    { name: "fact_orders", detail: "Order totals, status, and customer", relation: "parent of items and payments" },
+    { name: "fact_order_items", detail: "Quantity, price, tax, and revenue", relation: "joins orders to products" },
+    { name: "fact_payments", detail: "Provider, amount, and payment state", relation: "many payments → one order" },
+    { name: "order_inventory_reservations", detail: "Reserved, consumed, or released stock", relation: "order + product lifecycle" },
+  ];
+
   const limitations = [
-    "No production deployment — system designed for demonstration",
-    "Razorpay live payments disabled due to KYC constraints",
+    "Public Render deployment is a portfolio demo without a production SLA",
+    "Razorpay live credentials and payment execution are disabled in the public demo",
     "No automated email notifications implemented",
     "UI not optimized for animations or advanced interactions",
     "Mobile responsiveness limited to core workflows",
@@ -454,12 +472,12 @@ const GlobalCart360 = () => {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-              A system-level e-commerce implementation demonstrating backend logic, payment flow design, and real-world
-              development constraints.
+              A FastAPI commerce backend demonstrating authentication, inventory reservation, transactional checkout,
+              payment-state handling, PostgreSQL analytics, and operational constraints.
             </p>
 
             <div className="flex flex-wrap gap-2 mt-10">
-              {["React", "REST API", "PostgreSQL", "Razorpay", "JWT Auth", "Admin Panel"].map((tech) => (
+              {["FastAPI", "REST API", "PostgreSQL", "Razorpay", "JWT & RBAC", "Analytics"].map((tech) => (
                 <span
                   key={tech}
                   className="font-mono text-xs text-muted-foreground px-3 py-1.5 rounded-full border border-border bg-transparent"
@@ -494,8 +512,8 @@ const GlobalCart360 = () => {
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <p className="text-lg text-foreground leading-relaxed">
-                Traditional beginner e-commerce projects focus only on UI and ignore real backend workflows such as
-                authentication, order state handling, and payment gateway integration.
+                Many educational e-commerce applications simplify transaction handling, inventory consistency, and
+                payment workflows. GlobalScart was built to explore the backend coordination these workflows require.
               </p>
               <p className="text-muted-foreground mt-4 leading-relaxed">
                 <strong className="text-foreground">GlobalScart</strong> was built to simulate a real-world e-commerce
@@ -517,42 +535,98 @@ const GlobalCart360 = () => {
         </section>
 
         <section>
-          <SectionHeader number="03" title="High-Level System Architecture" subtitle="Layered component design" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <SectionHeader number="03" title="System Architecture" subtitle="Implementation-specific request and data path" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             <ArchitectureCard
-              title="Frontend Layer"
+              title="Browser Client"
               icon={<Monitor className="w-5 h-5" />}
-              items={["React UI rendering", "State management", "API consumption", "Form validation"]}
+              items={["Static shop and admin interfaces", "REST API consumption", "Client-side form validation", "Bearer-token requests"]}
               accentColor="primary"
             />
             <ArchitectureCard
-              title="Backend Layer"
+              title="FastAPI Application"
               icon={<Server className="w-5 h-5" />}
               items={[
-                "Authentication & authorization",
-                "Business logic handlers",
-                "Order lifecycle management",
-                "API endpoint routing",
+                "Customer and admin routers",
+                "JWT authentication and RBAC",
+                "Validation and domain orchestration",
+                "Request logging and error handling",
               ]}
               accentColor="accent"
             />
             <ArchitectureCard
-              title="Database Layer"
+              title="Commerce Services"
+              icon={<ShoppingCart className="w-5 h-5" />}
+              items={["Cart and checkout workflows", "Inventory reservation lifecycle", "Order and payment transitions", "Cancellation and stock release"]}
+              accentColor="primary"
+            />
+            <ArchitectureCard
+              title="PostgreSQL"
               icon={<Database className="w-5 h-5" />}
-              items={["Users table", "Products catalog", "Orders & line items", "Transactions log"]}
+              items={["Customer and product dimensions", "Order, item, and payment facts", "Inventory reservations", "Audit and funnel events"]}
               accentColor="terminal"
             />
             <ArchitectureCard
-              title="External Services"
+              title="Razorpay Boundary"
               icon={<CreditCard className="w-5 h-5" />}
-              items={["Razorpay (test mode)", "OTP verification", "Session management", "Analytics tracking"]}
+              items={["Provider order creation", "Signature confirmation", "Webhook endpoint", "Test-mode public integration"]}
               accentColor="primary"
             />
+            <ArchitectureCard
+              title="Analytics Layer"
+              icon={<Layout className="w-5 h-5" />}
+              items={["KPI snapshots and BI marts", "Revenue and funnel analysis", "Customer journey events", "Protected admin endpoints"]}
+              accentColor="accent"
+            />
+          </div>
+          <div className="mt-6 rounded-xl border border-border bg-card p-5 font-mono text-xs md:text-sm text-muted-foreground overflow-x-auto">
+            <span className="text-primary">Browser</span> → <span className="text-accent">FastAPI routers</span> → JWT/RBAC → Commerce services → <span className="text-terminal">PostgreSQL</span> → Analytics marts
           </div>
         </section>
 
         <section>
-          <SectionHeader number="04" title="Data & Control Flow" subtitle="Transaction pipeline step-by-step" />
+          <SectionHeader number="04" title="Database Design" subtitle="Core transactional relationships" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {schemaEntities.map((entity) => (
+              <div key={entity.name} className="rounded-xl border border-border bg-card p-5">
+                <code className="text-sm text-primary">{entity.name}</code>
+                <p className="mt-3 text-sm text-foreground">{entity.detail}</p>
+                <p className="mt-2 text-xs text-muted-foreground font-mono">{entity.relation}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 rounded-xl border border-border bg-card p-5 text-center font-mono text-xs md:text-sm text-muted-foreground overflow-x-auto">
+            dim_customer → fact_orders → fact_order_items ← dim_product<br />
+            fact_orders → fact_payments · fact_orders → order_inventory_reservations ← dim_product
+          </div>
+        </section>
+
+        <section>
+          <SectionHeader number="05" title="API Design" subtitle="Representative endpoints verified against the FastAPI routers" />
+          <div className="overflow-x-auto rounded-xl border border-border bg-card">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead className="border-b border-border text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="px-5 py-4">Method</th>
+                  <th className="px-5 py-4">Endpoint</th>
+                  <th className="px-5 py-4">Responsibility</th>
+                </tr>
+              </thead>
+              <tbody>
+                {apiEndpoints.map((endpoint) => (
+                  <tr key={`${endpoint.method}-${endpoint.path}`} className="border-b border-border last:border-0">
+                    <td className="px-5 py-4 font-mono text-accent">{endpoint.method}</td>
+                    <td className="px-5 py-4"><code className="text-primary">{endpoint.path}</code></td>
+                    <td className="px-5 py-4 text-muted-foreground">{endpoint.purpose}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section>
+          <SectionHeader number="06" title="Data & Control Flow" subtitle="Transaction pipeline step-by-step" />
           <div className="max-w-2xl">
             {flowSteps.map((step, index) => (
               <FlowStep
@@ -567,7 +641,7 @@ const GlobalCart360 = () => {
         </section>
 
         <section>
-          <SectionHeader number="05" title="Payment Gateway Integration" subtitle="Razorpay implementation details" />
+          <SectionHeader number="07" title="Checkout State Machine" subtitle="Order, payment, and inventory transitions" />
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <div className="flex items-start gap-4 mb-4">
@@ -591,9 +665,15 @@ const GlobalCart360 = () => {
 
               <div className="code-block mt-4">
                 <code className="text-terminal text-sm">
-                  <span className="text-muted-foreground">// Payment flow</span>
+                  <span className="text-muted-foreground">// Successful path</span>
                   <br />
-                  checkout → createOrder() → razorpay.init() → handlePayment() → updateOrderStatus()
+                  ORDER_CREATED + PAYMENT_PENDING + RESERVED
+                  <br />↓ confirm payment and consume reservation<br />
+                  ORDER_CONFIRMED + PAYMENT_SUCCESS + CONSUMED
+                  <br /><br />
+                  <span className="text-muted-foreground">// Failed payment path</span>
+                  <br />
+                  ORDER_CANCELLED + PAYMENT_FAILED + RELEASED
                 </code>
               </div>
             </div>
@@ -604,7 +684,7 @@ const GlobalCart360 = () => {
           <div className="grid gap-10 md:grid-cols-[minmax(260px,360px)_1fr] md:gap-16">
             <div className="md:sticky md:top-24 md:self-start">
               <SectionHeader
-                number="06"
+                number="08"
                 title="Execution Evidence — Customer Experience"
                 subtitle="System UI snapshots demonstrating implementation"
               />
@@ -631,7 +711,7 @@ const GlobalCart360 = () => {
         <section>
           <div className="grid gap-10 md:grid-cols-[minmax(260px,360px)_1fr] md:gap-16">
             <div className="md:sticky md:top-24 md:self-start">
-              <SectionHeader number="07" title="Execution Evidence — Admin System" subtitle="Backend monitoring and analytics" />
+              <SectionHeader number="09" title="Execution Evidence — Admin System" subtitle="Backend monitoring and analytics" />
               <Button variant="outline" size="sm" asChild className="mt-4">
                 <a href="https://globalscart.onrender.com/admin/" target="_blank" rel="noopener noreferrer">
                   View Admin Panel
@@ -653,7 +733,7 @@ const GlobalCart360 = () => {
         </section>
 
         <section>
-          <SectionHeader number="08" title="Design Decisions" subtitle="Reasoning behind implementation choices" />
+          <SectionHeader number="10" title="Design Decisions" subtitle="Reasoning behind implementation choices" />
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
             {designDecisions.map((item, index) => (
               <DesignDecision key={index} decision={item.decision} reason={item.reason} />
@@ -662,7 +742,7 @@ const GlobalCart360 = () => {
         </section>
 
         <section>
-          <SectionHeader number="09" title="Limitations & Constraints" subtitle="Explicit scope boundaries" />
+          <SectionHeader number="11" title="Limitations & Constraints" subtitle="Explicit scope boundaries" />
           <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
             {limitations.map((limitation, index) => (
               <LimitationItem key={index} text={limitation} />
@@ -671,7 +751,7 @@ const GlobalCart360 = () => {
         </section>
 
         <section>
-          <SectionHeader number="10" title="Learning Outcomes" subtitle="Skills developed through implementation" />
+          <SectionHeader number="12" title="Learning Outcomes" subtitle="Skills developed through implementation" />
           <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
             {learnings.map((learning, index) => (
               <LearningOutcome key={index} text={learning} />
@@ -687,9 +767,9 @@ const GlobalCart360 = () => {
             </div>
 
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "GlobalScart is not presented as a commercial product, but as a{" "}
-              <span className="text-primary font-medium">system-level e-commerce implementation</span>{" "}
-              demonstrating backend logic, payment flow design, and real-world development constraints."
+              "GlobalScart demonstrates <span className="text-primary font-medium">API design, authentication,
+              inventory consistency, transactional workflows, payment integration, and analytics</span> across the
+              operational constraints of a modern commerce backend."
             </blockquote>
           </div>
         </section>

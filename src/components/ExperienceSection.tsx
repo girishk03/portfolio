@@ -19,7 +19,7 @@ const experiences = [
     title: 'Independent Software Engineering Projects',
     company: 'Independent',
     period: '2024 - Present',
-    description: 'Built five production-style portfolio projects across backend engineering, NLP, computer vision, analytics, and constraint optimisation. Actively seeking entry-level Python Developer / Software Engineer roles.',
+    description: 'Built five software engineering projects spanning backend systems, optimization, NLP, analytics, and computer vision. Actively seeking entry-level Python Developer / Software Engineer roles.',
     highlights: ['Python', 'Machine Learning', 'FastAPI'],
   },
 ];
@@ -38,7 +38,7 @@ const education = [
     title: 'Diploma in ECE',
     company: 'Government Polytechnic Warangal',
     period: '2020 - 2023',
-    description: 'Completed Diploma in Electronics and Communication Engineering. CGPA: 7.19',
+    description: 'Completed Diploma in Electronics and Communication Engineering.',
     highlights: ['Electronics', 'Embedded Systems', 'Networking'],
   },
 ];
@@ -61,6 +61,14 @@ const certifications = [
   { name: 'Python Essentials 2', issuer: 'Cisco', year: '2023', pdfFile: 'Python Essentials 2.pdf' },
   { name: 'Networking Essentials', issuer: 'Cisco', year: '2023', pdfFile: 'Networking Essential.pdf' },
 ];
+
+const featuredCertificateNames = new Set([
+  'CCNA - Introduction to Networks',
+  'CCNA - Enterprise Networking',
+  'MongoDB Transactions',
+  'Python Essentials 1',
+  'Python Essentials 2',
+]);
 
 export const ExperienceSection = () => {
   const [certificatesOpen, setCertificatesOpen] = useState(false);
@@ -90,7 +98,7 @@ export const ExperienceSection = () => {
     });
   }, [certificateQuery, sortedCertifications]);
 
-  const marqueeCertifications = [...sortedCertifications, ...sortedCertifications];
+  const featuredCertifications = sortedCertifications.filter((cert) => featuredCertificateNames.has(cert.name));
 
   return (
     <section id="experience" className="section-padding relative">
@@ -161,11 +169,11 @@ export const ExperienceSection = () => {
               <div className="flex flex-col items-center gap-4 mb-8 sm:flex-row sm:justify-between">
                 <h3 className="text-2xl font-semibold text-center flex items-center justify-center gap-3 sm:text-left">
                   <Award className="h-6 w-6 text-primary" />
-                  Certifications ({certifications.length})
+                  Featured Certifications
                 </h3>
                 <Dialog open={certificatesOpen} onOpenChange={setCertificatesOpen}>
                   <DialogTrigger asChild>
-                    <Button variant="heroOutline" size="sm">View All</Button>
+                    <Button variant="heroOutline" size="sm">View All ({certifications.length})</Button>
                   </DialogTrigger>
                   <DialogContent className="w-[calc(100vw-2rem)] max-w-5xl p-4 sm:p-6">
                     <DialogHeader>
@@ -238,17 +246,15 @@ export const ExperienceSection = () => {
               </div>
             </div>
 
-            <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-              <div className="marquee [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-                <div className="marquee-track gap-4 pb-2 px-4 sm:px-6 lg:px-8" style={{ ['--marquee-duration' as never]: '45s' }}>
-                {marqueeCertifications.map((cert, index) => {
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                {featuredCertifications.map((cert) => {
                   const pdfHref = cert.pdfFile ? `/certificates/${encodeURIComponent(cert.pdfFile)}` : undefined;
                   const pdfPreviewHref = pdfHref ? `${pdfHref}#page=1&view=FitH` : undefined;
 
                   return (
                     <div
-                      key={`${cert.name}-${cert.pdfFile ?? cert.issuer}-${index}`}
-                      className="glass rounded-xl p-4 card-hover min-w-[220px] md:min-w-[240px] lg:min-w-[260px]"
+                      key={`${cert.name}-${cert.pdfFile ?? cert.issuer}`}
+                      className="glass rounded-xl p-4 card-hover"
                     >
                       {pdfPreviewHref && (
                         <div className="mb-4 overflow-hidden rounded-lg border border-border/50 bg-muted/20">
@@ -287,8 +293,6 @@ export const ExperienceSection = () => {
                     </div>
                   );
                 })}
-              </div>
-            </div>
             </div>
           </div>
         </ScrollReveal>

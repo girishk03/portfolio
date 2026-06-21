@@ -118,10 +118,10 @@ const UniversityTimetabling = () => {
   const objectives = [
     "Formulate university scheduling as a Constraint Programming problem",
     "Detect and repair infeasible timetables automatically",
-    "Achieve Quality Score 100 on ITC-2019 benchmark instances",
-    "Solve the included sample quickly while exposing configurable time budgets for larger instances",
+    "Evaluate included ITC-2019 instances and document solution quality",
+    "Expose configurable solve and LNS budgets for instances of different sizes",
     "Build a live interactive dashboard for results visualization",
-    "Deploy a FastAPI wrapper for programmatic access",
+    "Expose the solver through a FastAPI wrapper for programmatic access",
   ];
 
   const flowSteps = [
@@ -134,14 +134,14 @@ const UniversityTimetabling = () => {
   ];
 
   const designDecisions = [
-    { decision: "CP-SAT over heuristic-only solver", reason: "OR-Tools CP-SAT provides provably optimal solutions within time bounds, not just good-enough heuristics" },
+    { decision: "CP-SAT over heuristic-only solver", reason: "OR-Tools CP-SAT can return feasible incumbents under a time limit and prove optimality when the search completes" },
     { decision: "LNS as improvement layer", reason: "Pure CP-SAT on large instances is slow; LNS improves solution quality incrementally without full re-solve" },
-    { decision: "ITC-2019 benchmark standard", reason: "Using an internationally recognised benchmark enables objective comparison against published solvers" },
-    { decision: "FastAPI wrapper", reason: "Programmatic access allows integration with university ERP systems and future automation workflows" },
+    { decision: "ITC-2019 benchmark format", reason: "A recognized instance format makes parser behavior and constraint inputs easier to inspect and reproduce" },
+    { decision: "FastAPI wrapper", reason: "A thin HTTP boundary reuses the CLI solver path and makes XML-to-JSON execution available to other clients" },
   ];
 
   const limitations = [
-    "Solve time grows with instance size — very large universities may exceed 2s",
+    "Solve time grows with instance size and depends on the configured time budget",
     "Hybrid mode (online/physical) adds constraint complexity not in base ITC-2019",
     "No live database integration — inputs are file-based XML",
     "Dashboard is read-only — no drag-and-drop manual adjustment",
@@ -153,13 +153,13 @@ const UniversityTimetabling = () => {
     "OR-Tools CP-SAT API — variable domains, constraints, and objective functions",
     "Large Neighbourhood Search design patterns for local improvement",
     "ITC-2019 problem format and evaluation criteria",
-    "FastAPI deployment and async endpoint design",
+    "FastAPI wrapper design and asynchronous file-upload handling",
     "Building interactive dashboards for algorithmic output visualisation",
   ];
 
   const evidence = [
     { src: "/projects/timetabling/dashboard.jpeg", alt: "Dashboard", caption: "fig.01 — Live GitHub Pages dashboard showing solved timetable", category: "DASHBOARD" },
-    { src: "/projects/timetabling/dashboard.jpeg", alt: "Results", caption: "fig.02 — Feasibility analysis: 0% physical → 100% hybrid", category: "RESULTS" },
+    { src: "/projects/timetabling/dashboard.jpeg", alt: "Results", caption: "fig.02 — Physical versus hybrid feasibility view for the included demo", category: "RESULTS" },
     { src: "/projects/timetabling/dashboard.jpeg", alt: "Schedule", caption: "fig.03 — Student schedule view with zero clash validation", category: "SCHEDULE" },
   ];
 
@@ -205,12 +205,17 @@ const UniversityTimetabling = () => {
           </div>
         </section>
         <section>
-          <SectionHeader number="03" title="System Architecture" subtitle="Layered solver design" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ArchCard title="CP-SAT Solver" icon={<Cpu className="w-5 h-5"/>} items={["Variable domain definition","Hard constraint encoding","5-tier lexicographic objectives","Optimal solution search"]} accent="primary"/>
-            <ArchCard title="LNS Layer" icon={<Layers className="w-5 h-5"/>} items={["Destroy operator","Repair phase","Iteration budget","Solution quality tracking"]} accent="accent"/>
-            <ArchCard title="Validation" icon={<Calendar className="w-5 h-5"/>} items={["Zero clash verification","Room capacity checks","Student enrolment validation","Diagnostic recommendations"]} accent="terminal"/>
-            <ArchCard title="API + Dashboard" icon={<BarChart2 className="w-5 h-5"/>} items={["FastAPI HTTP endpoint","JSON output format","GitHub Pages dashboard","Interactive visualisation"]} accent="primary"/>
+          <SectionHeader number="03" title="System Architecture" subtitle="From benchmark input to independently validated output" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <ArchCard title="XML Parser" icon={<Code className="w-5 h-5"/>} items={["ITC-2019 / UniTime XML","Courses, rooms, and students","Allowed times and capacities","Normalized internal model"]} accent="primary"/>
+            <ArchCard title="Constraint Builder" icon={<Layers className="w-5 h-5"/>} items={["Boolean decision variables","Room and time exclusivity","Capacity and attendance rules","Ordered quality objectives"]} accent="accent"/>
+            <ArchCard title="CP-SAT Solver" icon={<Cpu className="w-5 h-5"/>} items={["Feasible incumbent search","Configurable time limits","Strict or bounded relaxation","Objective tuple tracking"]} accent="primary"/>
+            <ArchCard title="LNS Improvement" icon={<Zap className="w-5 h-5"/>} items={["Destroy selected assignments","Fix the remaining incumbent","Re-optimize the neighborhood","Accept improving candidates"]} accent="accent"/>
+            <ArchCard title="Validation Engine" icon={<Calendar className="w-5 h-5"/>} items={["Student clash checks","Room capacity checks","Schedule consistency","Diagnostics and recommendations"]} accent="terminal"/>
+            <ArchCard title="Output Surfaces" icon={<BarChart2 className="w-5 h-5"/>} items={["Structured solution JSON","FastAPI /solve wrapper","Static analytics dashboard","GitHub Pages visualization"]} accent="primary"/>
+          </div>
+          <div className="mt-6 rounded-xl border border-border bg-card p-5 font-mono text-xs md:text-sm text-muted-foreground overflow-x-auto">
+            <span className="text-primary">ITC-2019 XML</span> → Parser → Constraint Builder → <span className="text-accent">CP-SAT</span> → LNS → Validation → <span className="text-terminal">JSON / Dashboard</span>
           </div>
         </section>
         <section>
@@ -220,31 +225,60 @@ const UniversityTimetabling = () => {
           </div>
         </section>
         <section>
-          <SectionHeader number="05" title="Benchmark Results" subtitle="ITC-2019 performance" />
+          <SectionHeader number="05" title="Constraint Model" subtitle="Validity rules versus optimization preferences" />
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl">
+            <div className="rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold text-primary">Hard Constraints</h3>
+              <p className="mt-2 text-sm text-muted-foreground">A strict-mode solution is rejected when these invariants fail.</p>
+              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                {["Each class uses exactly one allowed time", "A physical room hosts at most one class at a time", "Room capacity and class subscription limits are respected", "A student cannot attend overlapping classes", "Room, delivery mode, and hybrid capability remain consistent"].map(item=><li key={item} className="flex gap-2"><span className="text-primary">•</span><span>{item}</span></li>)}
+              </ul>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold text-accent">Soft Constraints & Objectives</h3>
+              <p className="mt-2 text-sm text-muted-foreground">The solver optimizes applicable preferences in priority order.</p>
+              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                {["Maximize students receiving an attended class", "Minimize bounded relaxation penalties", "Minimize timetable changes during repair", "Maximize elective-module satisfaction", "Minimize delivery-mode, late-class, and consecutive-class penalties"].map(item=><li key={item} className="flex gap-2"><span className="text-accent">•</span><span>{item}</span></li>)}
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section>
+          <SectionHeader number="06" title="Included Solution Artifact" subtitle="Sample-specific evidence, not a general benchmark claim" />
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <div className="flex items-start gap-4 mb-4">
                 <Zap className="w-8 h-8 text-accent flex-shrink-0"/>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">ITC-2019 Standard Instances</h3>
-                  <p className="text-muted-foreground mt-2">Tested on 150 classes, 7 rooms, multiple student groups.</p>
+                  <h3 className="text-lg font-semibold text-foreground">Committed <code>full_solution.json</code></h3>
+                  <p className="text-muted-foreground mt-2">The included artifact contains 150 scheduled classes and reports an optimal status for that run.</p>
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 mt-4">
-                {[{label:"Quality Score",value:"100"},{label:"Solve Time",value:"<2s"},{label:"Feasibility",value:"100%"}].map(m=>(
+                {[{label:"Quality Score",value:"100"},{label:"Recorded Solve Time",value:"90.04s"},{label:"Reported Violations",value:"0"}].map(m=>(
                   <div key={m.label} className="rounded-lg border border-border bg-muted/10 p-4 text-center">
                     <div className="text-2xl font-bold text-primary">{m.value}</div>
                     <div className="text-xs text-muted-foreground mt-1">{m.label}</div>
                   </div>
                 ))}
               </div>
+              <p className="mt-5 text-sm text-muted-foreground">
+                These values describe one committed solution artifact. The repository does not record hardware, repeated-run statistics, or a cross-instance benchmark, so the result should not be generalized.
+              </p>
             </div>
+          </div>
+        </section>
+        <section>
+          <SectionHeader number="07" title="Sample Solver Output" subtitle="Excerpt from the committed schedule artifact" />
+          <div className="max-w-3xl rounded-xl border border-border bg-card p-6 overflow-x-auto">
+            <pre className="font-mono text-sm text-terminal leading-7"><code>{`Class 1   → time 4  → room 6 → in_person\nClass 10  → time 95 → room 3 → in_person\nClass 100 → time 98 → room 2 → in_person\n\nstatus: OPTIMAL\nstudent_overlaps: 0\nroom_overflow: 0`}</code></pre>
+            <p className="mt-4 text-xs text-muted-foreground">Internal identifiers are preserved because human-readable room labels are not stored in the solution artifact.</p>
           </div>
         </section>
         <section>
           <div className="grid gap-10 md:grid-cols-[minmax(260px,360px)_1fr] md:gap-16">
             <div className="md:sticky md:top-24 md:self-start">
-              <SectionHeader number="06" title="Execution Evidence" subtitle="Dashboard and results snapshots"/>
+              <SectionHeader number="08" title="Execution Evidence" subtitle="Dashboard and results snapshots"/>
             </div>
             <div className="grid gap-8">
               {evidence.map((img,i)=><EvidenceImage key={i} src={img.src} alt={img.alt} caption={img.caption} category={img.category}/>)}
@@ -252,19 +286,19 @@ const UniversityTimetabling = () => {
           </div>
         </section>
         <section>
-          <SectionHeader number="07" title="Design Decisions" subtitle="Reasoning behind implementation choices"/>
+          <SectionHeader number="09" title="Design Decisions" subtitle="Reasoning behind implementation choices"/>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
             {designDecisions.map((d,i)=><DD key={i} decision={d.decision} reason={d.reason}/>)}
           </div>
         </section>
         <section>
-          <SectionHeader number="08" title="Limitations & Constraints" subtitle="Explicit scope boundaries"/>
+          <SectionHeader number="10" title="Limitations & Constraints" subtitle="Explicit scope boundaries"/>
           <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
             {limitations.map((l,i)=><LimItem key={i} text={l}/>)}
           </div>
         </section>
         <section>
-          <SectionHeader number="09" title="Learning Outcomes" subtitle="Skills developed through implementation"/>
+          <SectionHeader number="11" title="Learning Outcomes" subtitle="Skills developed through implementation"/>
           <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
             {learnings.map((l,i)=><LItem key={i} text={l}/>)}
           </div>
@@ -276,7 +310,8 @@ const UniversityTimetabling = () => {
               <span className="font-mono text-xs text-primary uppercase tracking-wider">Final Statement</span>
             </div>
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "University Timetabling Solver is an interview-ready optimization project with explicit constraints, infeasibility diagnostics, automated tests, and an interactive dashboard."
+              "University Timetabling Solver demonstrates constraint programming, infeasibility diagnostics,
+              optimization workflows, and independent schedule validation using OR-Tools CP-SAT and LNS."
             </blockquote>
           </div>
         </section>

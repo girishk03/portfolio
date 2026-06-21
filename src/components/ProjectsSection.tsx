@@ -6,9 +6,9 @@ const projects = [
   {
     id: 1,
     title: 'GlobalScart',
-    description: 'Production-style FastAPI commerce backend with JWT authentication, RBAC, transactional checkout, PostgreSQL analytics, Docker, and CI.',
+    description: 'FastAPI commerce backend with JWT authentication, RBAC, transactional checkout, PostgreSQL analytics, Docker, and CI.',
     image: '/projects/globalcart-360/globalscart/welcome.jpg',
-    technologies: ['FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'CI/CD'],
+    technologies: ['FastAPI', 'PostgreSQL', 'JWT', 'Docker', 'CI/CD'],
     category: 'Backend Systems',
     highlights: ['JWT authentication and role-based access', 'Transactional checkout and inventory handling', 'Render deployment configuration with GitHub Actions CI'],
     githubUrl: 'https://github.com/girishk03/GlobalScart',
@@ -29,12 +29,12 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Hate Speech Detection',
-    description: 'TF-IDF + LinearSVC classifier with verified evaluation artifacts, a YouTube comment-analysis interface, and SocketIO chatroom moderation assistance.',
+    title: 'Comment Sentiment & Moderation Assistant',
+    description: 'Three-class TF-IDF + LinearSVC sentiment classifier with a YouTube analysis interface and separate rule-based SocketIO moderation assistance.',
     image: '/projects/hate-speech/07-chatroom-result.png',
     technologies: ['Flask', 'scikit-learn', 'NLP', 'SocketIO', 'TF-IDF'],
     category: 'Applied NLP',
-    highlights: ['TF-IDF + LinearSVC with documented evaluation', 'YouTube comment classifier with toxicity scoring', 'SocketIO moderation assistance with human-review limits'],
+    highlights: ['TF-IDF + LinearSVC with documented evaluation', 'YouTube sentiment analysis with derived risk indicators', 'Rule-based SocketIO assistance with human-review limits'],
     githubUrl: 'https://github.com/girishk03/hate-speech-detection',
     liveUrl: 'https://hate-speech-detection-zqjy.onrender.com',
     caseStudyUrl: '/project/hate-speech-detection',
@@ -72,7 +72,7 @@ export const ProjectsSection = () => {
         <div className="max-w-3xl">
           <ScrollLinkedText as="h2" className="type-h2">Selected Projects</ScrollLinkedText>
           <ScrollLinkedText as="p" className="type-body mt-4">
-            Five production-style projects across backend engineering, optimization, NLP, analytics, and computer vision.
+            Five documented software engineering projects across backend systems, optimization, NLP, analytics, and computer vision.
           </ScrollLinkedText>
         </div>
         <div className="mt-10 grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">

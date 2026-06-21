@@ -35,10 +35,10 @@ export const HeroSection = () => {
           </div>
 
           <p className="mt-6 mx-auto max-w-2xl text-muted-foreground">
-            Computer Science graduate and Python backend developer building production-style systems with{' '}
+            Computer Science graduate and Python backend developer building documented software systems with{' '}
             <span className="text-primary">FastAPI</span>,{' '}
             <span className="text-primary">PostgreSQL</span>, and{' '}
-            <span className="text-primary">OR-Tools</span>. Five portfolio projects spanning backend engineering, optimization, NLP, analytics, and computer vision.
+            <span className="text-primary">OR-Tools</span>. Five documented software engineering projects spanning backend systems, optimization, NLP, analytics, and computer vision.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">

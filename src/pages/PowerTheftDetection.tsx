@@ -125,7 +125,7 @@ const PowerTheftDetection = () => {
 
   const flowSteps = [
     { title: "Smart Meter Data Input", description: "Simulated mode by default or the first 1,000 rows of the documented 2015 dataset" },
-    { title: "Heuristic Risk Scoring", description: "HIGH/MEDIUM/LOW risk scoring based on consumption patterns and anomaly thresholds" },
+    { title: "Heuristic Risk Scoring", description: "Compares actual consumption with an expected baseline and clamps the resulting review score" },
     { title: "Risk Categorization", description: "Transparent thresholds assign high, medium, or lower-priority investigation status" },
     { title: "Data-Quality Reporting", description: "Documents missing readings, label distribution, and source/license uncertainty" },
     { title: "Dashboard Visualisation", description: "Displays customer risk scores and supporting consumption summaries" },
@@ -140,7 +140,7 @@ const PowerTheftDetection = () => {
   ];
 
   const limitations = [
-    "Simulated dataset — not validated on real utility smart meter data",
+    "Runtime defaults to simulated data; the included 2015 dataset has unverified source and licensing",
     "No live data ingestion — dashboard uses pre-computed results",
     "No trained theft-classification model or reproducible ML evaluation is included",
     "Heuristic thresholds manually tuned — not learned from data",
@@ -189,8 +189,8 @@ const PowerTheftDetection = () => {
           <SectionHeader number="01" title="Problem Statement" subtitle="The smart grid monitoring gap" />
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
-              <p className="text-lg text-foreground leading-relaxed">Power theft costs utilities billions annually. Traditional rule-based systems miss sophisticated theft patterns. ML-based anomaly detection on smart meter data can identify suspicious consumption signatures automatically.</p>
-              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Power Theft Detection</strong> was built to demonstrate a <span className="text-primary">systematic ML comparison framework</span> with <span className="text-accent"> evaluation-focused reporting</span> and a <span className="text-terminal"> live operational dashboard</span> — not just a notebook experiment.</p>
+              <p className="text-lg text-foreground leading-relaxed">Smart-meter monitoring systems often use statistical, heuristic, or machine-learning approaches to prioritize suspicious consumption patterns for analyst review.</p>
+              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Power Theft Detection</strong> implements a <span className="text-primary">transparent heuristic ranking workflow</span> with <span className="text-accent"> data-quality reporting</span> and a <span className="text-terminal"> Flask monitoring dashboard</span>. It prioritizes records for investigation rather than claiming definitive theft detection.</p>
             </div>
           </div>
         </section>
@@ -204,7 +204,7 @@ const PowerTheftDetection = () => {
           <SectionHeader number="03" title="System Architecture" subtitle="Layered monitoring design" />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <ArchCard title="Data Pipeline" icon={<Database className="w-5 h-5"/>} items={["Simulated mode by default","First 1,000 real-data rows","2015 daily readings","Missing-value handling"]} accent="primary"/>
-            <ArchCard title="Risk Engine" icon={<Cpu className="w-5 h-5"/>} items={["Consumption features","Transparent thresholds","Risk-score clamp","Priority categories"]} accent="accent"/>
+            <ArchCard title="Risk Engine" icon={<Cpu className="w-5 h-5"/>} items={["Actual-to-expected ratio","Transparent thresholds","Risk-score clamp","Priority categories"]} accent="accent"/>
             <ArchCard title="Validation" icon={<BarChart2 className="w-5 h-5"/>} items={["30 automated tests","API route coverage","Real-data sampling","Docker build validation"]} accent="terminal"/>
             <ArchCard title="Dashboard" icon={<Shield className="w-5 h-5"/>} items={["Heuristic risk scoring","Customer prioritization","Consumption summaries","Analyst review workflow"]} accent="primary"/>
           </div>
@@ -238,9 +238,48 @@ const PowerTheftDetection = () => {
           </div>
         </section>
         <section>
+          <SectionHeader number="06" title="Risk-Scoring Heuristic" subtitle="Exact runtime rule used for investigation ranking" />
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr] max-w-5xl">
+            <div className="rounded-xl border border-border bg-card p-6 overflow-x-auto">
+              <pre className="font-mono text-sm text-terminal leading-7"><code>{`raw_score = 1 - (actual_consumption / expected_consumption)\nrisk_score = clamp(raw_score, 0.30, 0.95)\n\nif baseline is missing or invalid:\n    risk_score = 0.80`}</code></pre>
+              <p className="mt-4 text-xs text-muted-foreground">The score is a review-ranking heuristic, not a calibrated theft probability.</p>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold">Priority thresholds</h3>
+              <div className="mt-5 space-y-3 text-sm">
+                <div className="flex items-center justify-between rounded-lg border border-border p-3"><span className="text-muted-foreground">HIGH</span><code className="text-primary">score &gt; 0.70</code></div>
+                <div className="flex items-center justify-between rounded-lg border border-border p-3"><span className="text-muted-foreground">MEDIUM</span><code className="text-accent">score ≥ 0.40</code></div>
+                <div className="flex items-center justify-between rounded-lg border border-border p-3"><span className="text-muted-foreground">LOW</span><code className="text-terminal">score &lt; 0.40</code></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <SectionHeader number="07" title="Investigation Explainability" subtitle="What an analyst can infer from each ranked record" />
+          <div className="grid gap-6 lg:grid-cols-2 max-w-5xl">
+            <div className="rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold">Returned evidence</h3>
+              <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+                {["actual_consumption", "expected_consumption", "risk_score", "risk_level", "status"].map(field=>(
+                  <code key={field} className="rounded-lg border border-border p-3 text-primary">{field}</code>
+                ))}
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground">These fields let an analyst trace a priority label back to the consumption gap and configured threshold instead of receiving an opaque prediction.</p>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold">Worked example</h3>
+              <pre className="mt-5 font-mono text-sm text-terminal leading-7"><code>{`actual = 10\nexpected = 20\nraw_score = 1 - (10 / 20) = 0.50\npriority = MEDIUM`}</code></pre>
+              <p className="mt-4 text-xs text-muted-foreground">Illustrative calculation using the implemented formula—not a claimed customer outcome.</p>
+            </div>
+          </div>
+          <div className="mt-6 max-w-5xl rounded-xl border border-warning/20 bg-warning/5 p-5 text-sm text-muted-foreground">
+            <span className="font-semibold text-warning">Current boundary:</span> missing-day counts, variance anomalies, seasonal baselines, and multi-rule reason codes do not contribute to the runtime score. They are valid future improvements, not implemented explanations.
+          </div>
+        </section>
+        <section>
           <div className="grid gap-10 md:grid-cols-[minmax(260px,360px)_1fr] md:gap-16">
             <div className="md:sticky md:top-24 md:self-start">
-              <SectionHeader number="06" title="Execution Evidence" subtitle="Dashboard and results snapshots"/>
+              <SectionHeader number="08" title="Execution Evidence" subtitle="Dashboard and results snapshots"/>
             </div>
             <div className="grid gap-8">
               {evidence.map((img,i)=><EvidenceImage key={i} src={img.src} alt={img.alt} caption={img.caption} category={img.category}/>)}
@@ -248,19 +287,19 @@ const PowerTheftDetection = () => {
           </div>
         </section>
         <section>
-          <SectionHeader number="07" title="Design Decisions" subtitle="Reasoning behind implementation choices"/>
+          <SectionHeader number="09" title="Design Decisions" subtitle="Reasoning behind implementation choices"/>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
             {designDecisions.map((d,i)=><DD key={i} decision={d.decision} reason={d.reason}/>)}
           </div>
         </section>
         <section>
-          <SectionHeader number="08" title="Limitations & Constraints" subtitle="Explicit scope boundaries"/>
+          <SectionHeader number="10" title="Limitations & Constraints" subtitle="Explicit scope boundaries"/>
           <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
             {limitations.map((l,i)=><LimItem key={i} text={l}/>)}
           </div>
         </section>
         <section>
-          <SectionHeader number="09" title="Learning Outcomes" subtitle="Skills developed through implementation"/>
+          <SectionHeader number="11" title="Learning Outcomes" subtitle="Skills developed through implementation"/>
           <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
             {learnings.map((l,i)=><LItem key={i} text={l}/>)}
           </div>
@@ -272,7 +311,9 @@ const PowerTheftDetection = () => {
               <span className="font-mono text-xs text-primary uppercase tracking-wider">Final Statement</span>
             </div>
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "Power Theft Detection is not just a model — it is a <span className="text-primary font-medium">systematic evaluation framework</span> comparing classical and deep learning approaches on real operational smart grid data."
+              "Power Theft Detection demonstrates <span className="text-primary font-medium">heuristic risk scoring,
+              data-quality reporting, and investigation prioritization workflows</span> for smart-meter monitoring while
+              explicitly documenting implementation and evaluation boundaries."
             </blockquote>
           </div>
         </section>

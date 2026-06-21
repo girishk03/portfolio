@@ -116,57 +116,60 @@ const HateSpeechDetection = () => {
   }, []);
 
   const objectives = [
-    "Build an NLP classifier that generalises across hate speech and clean text",
-    "Create a live YouTube comment analyser with toxicity scoring",
-    "Implement real-time AI chatroom moderation via SocketIO",
+    "Build a three-class sentiment-style text classifier",
+    "Create a YouTube comment analyser for positive, neutral, and negative trends",
+    "Implement rule-based chatroom moderation assistance via SocketIO",
     "Package Flask interfaces with smoke-tested CI and documented deployment limits",
-    "Achieve balanced Macro F1 across both classes, not just accuracy",
+    "Evaluate all three labels with Macro F1 alongside accuracy",
   ];
 
   const flowSteps = [
     { title: "Text Input", description: "User submits text, YouTube URL, or chatroom message" },
-    { title: "Preprocessing", description: "NLTK tokenization → stopword removal → TF-IDF vectorization" },
-    { title: "Classification", description: "LinearSVC predicts hate/clean with confidence score" },
-    { title: "YouTube Pipeline", description: "youtube-comment-downloader fetches comments → batch classify → toxicity report" },
-    { title: "Chatroom Moderation", description: "SocketIO intercepts message → classify → rewrite if toxic → broadcast polite version" },
-    { title: "Response", description: "Result returned with label, confidence, and keyword highlights" },
+    { title: "Text Cleaning", description: "Lowercase text → remove URLs, mentions, hashtag tokens, and non-alphabetic characters" },
+    { title: "Feature Extraction", description: "TF-IDF converts cleaned unigrams and bigrams into a 5,000-feature vector" },
+    { title: "Classification", description: "LinearSVC predicts positive, neutral, or negative sentiment-style labels" },
+    { title: "YouTube Pipeline", description: "youtube-comment-downloader fetches comments → batch classify → summarize label trends" },
+    { title: "Chatroom Assistance", description: "SocketIO receives messages → VADER and phrase rules flag content → term replacements suggest polite wording" },
+    { title: "Flask Response", description: "Interfaces return labels, derived risk signals, and moderation suggestions" },
   ];
 
   const designDecisions = [
-    { decision: "TF-IDF + LinearSVC over deep learning", reason: "Lightweight, fast inference, and interpretable — ideal for real-time moderation without GPU requirements" },
+    { decision: "TF-IDF + LinearSVC over deep learning", reason: "The sparse linear pipeline keeps inference lightweight and avoids a GPU dependency for the three-class text task" },
     { decision: "SocketIO for chatroom", reason: "Real-time bidirectional communication enables live message interception and rewriting without page reload" },
-    { decision: "YouTube comment integration", reason: "Demonstrates real-world applicability — not just a toy classifier but a usable moderation tool" },
-    { decision: "Macro F1 as primary metric", reason: "Balanced evaluation across both classes prevents the model from ignoring the minority hate speech class" },
+    { decision: "YouTube comment integration", reason: "Exercises batch inference on fetched comments while keeping the classifier output visible for human interpretation" },
+    { decision: "Macro F1 alongside accuracy", reason: "Macro averaging gives each of the three sentiment-style labels equal weight and exposes class-specific weakness" },
   ];
 
   const limitations = [
-    "Model accuracy limited by dataset size (6,424 samples)",
+    "The 6,424 records are the test split; the training CSV source and license remain unverified",
+    "Positive, neutral, and negative labels are not direct hate-speech or protected-group abuse labels",
     "No context window — classifies each message independently",
-    "YouTube API rate limits affect large comment volumes",
-    "Chatroom rewriting quality depends on LLM prompt tuning",
+    "Fetched-comment availability depends on an unofficial downloader and upstream platform changes",
+    "Chatroom suggestions use VADER, phrase rules, and term replacement rather than semantic rewriting",
     "No multilingual support — English only",
+    "Predictions must not be the sole basis for moderation or enforcement decisions",
   ];
 
   const learnings = [
-    "End-to-end NLP pipeline from raw text to deployed API",
+    "End-to-end NLP pipeline from raw text to Flask interfaces",
     "Real-time SocketIO architecture for live moderation",
     "Evaluation discipline — Macro F1 over raw accuracy",
-    "Integrating third-party APIs (YouTube) into ML pipelines",
-    "Deployment constraints and CI/CD with Render",
+    "Integrating fetched YouTube comments into batch inference workflows",
+    "Deployment constraints and smoke-tested CI",
     "Balancing inference speed vs model complexity",
   ];
 
   const evidence = [
     { src: "/projects/hate-speech/01-youtube-home.png", alt: "YouTube Home", caption: "fig.01 — YouTube URL input for comment analysis", category: "YOUTUBE" },
-    { src: "/projects/hate-speech/02-youtube-results.png", alt: "YouTube Results", caption: "fig.02 — Per-comment toxicity scores and labels", category: "YOUTUBE" },
+    { src: "/projects/hate-speech/02-youtube-results.png", alt: "YouTube Results", caption: "fig.02 — Per-comment sentiment labels and derived risk indicators", category: "YOUTUBE" },
     { src: "/projects/hate-speech/03-youtube-results-full.png", alt: "Full Results", caption: "fig.03 — Full comment analysis report", category: "YOUTUBE" },
     { src: "/projects/hate-speech/04-comment-list.png", alt: "Comment List", caption: "fig.04 — Classified comment list with highlights", category: "RESULTS" },
-    { src: "/projects/hate-speech/05-insights-panel.png", alt: "Insights Panel", caption: "fig.05 — Toxicity insights and breakdown panel", category: "INSIGHTS", pair: true },
+    { src: "/projects/hate-speech/05-insights-panel.png", alt: "Insights Panel", caption: "fig.05 — Sentiment distribution and derived risk summary", category: "INSIGHTS", pair: true },
     { src: "/projects/hate-speech/06-insights-scans.png", alt: "Scans", caption: "fig.06 — Scan history and batch results", category: "INSIGHTS", pair: true },
-    { src: "/projects/hate-speech/07-chatroom-home.png", alt: "Chatroom Home", caption: "fig.07 — AI polite chatroom entry screen", category: "CHATROOM" },
-    { src: "/projects/hate-speech/07-chatroom-result.png", alt: "Chatroom Result", caption: "fig.08 — Real-time hate speech detection in chatroom", category: "CHATROOM" },
-    { src: "/projects/hate-speech/08-chatroom-result.png", alt: "Chatroom Moderation", caption: "fig.09 — Moderated message rewritten as polite version", category: "CHATROOM" },
-    { src: "/projects/hate-speech/09-polite-conversion.png", alt: "Polite Conversion", caption: "fig.10 — AI polite conversion output", category: "CHATROOM" },
+    { src: "/projects/hate-speech/07-chatroom-home.png", alt: "Chatroom Home", caption: "fig.07 — Rule-based chatroom assistant entry screen", category: "CHATROOM" },
+    { src: "/projects/hate-speech/07-chatroom-result.png", alt: "Chatroom Result", caption: "fig.08 — Rule-based message flagging in the chatroom", category: "CHATROOM" },
+    { src: "/projects/hate-speech/08-chatroom-result.png", alt: "Chatroom Moderation", caption: "fig.09 — Suggested alternative wording from phrase rules", category: "CHATROOM" },
+    { src: "/projects/hate-speech/09-polite-conversion.png", alt: "Polite Conversion", caption: "fig.10 — Rule-based term-replacement output", category: "CHATROOM" },
   ];
 
   return (
@@ -177,9 +180,10 @@ const HateSpeechDetection = () => {
       <header className="border-b border-border">
         <div className="container mx-auto px-6 py-24">
           <div className="max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Hate Speech Detection</h1>
+            <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Comment Sentiment & Moderation Assistant</h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-              NLP classifier + live YouTube comment analyser + AI polite chatroom with real-time SocketIO moderation. 78.5% accuracy, Macro F1: 0.78 on 6,424 samples.
+              Three-class sentiment-style text classifier with a YouTube comment-analysis interface and a separate
+              rule-based SocketIO chatroom assistant. The classifier reports 78.50% accuracy and 0.7832 Macro F1 on a 6,424-record holdout.
             </p>
             <div className="flex flex-wrap gap-2 mt-10">
               {["Flask","TF-IDF","LinearSVC","NLTK","SocketIO","scikit-learn","Render"].map(t=>(
@@ -199,8 +203,8 @@ const HateSpeechDetection = () => {
           <SectionHeader number="01" title="Problem Statement" subtitle="The moderation gap" />
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
-              <p className="text-lg text-foreground leading-relaxed">Online hate speech is growing faster than manual moderation can handle. YouTube comment sections, chatrooms, and social feeds generate millions of messages daily that no human team can review.</p>
-              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Hate Speech Detection</strong> demonstrates a <span className="text-primary">lightweight NLP classification workflow</span> with <span className="text-accent"> SocketIO chatroom assistance</span> and a <span className="text-terminal"> YouTube comment-analysis interface</span>, with human review required for moderation decisions.</p>
+              <p className="text-lg text-foreground leading-relaxed">High-volume comment and chat systems need ways to prioritize potentially negative content without treating an automated prediction as a final moderation decision.</p>
+              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Comment Sentiment & Moderation Assistant</strong> combines a <span className="text-primary">three-class sentiment-style classifier</span> with <span className="text-accent"> rule-based SocketIO chatroom assistance</span> and a <span className="text-terminal"> YouTube comment-analysis interface</span>. It does not equate negative sentiment with hate speech, and human review remains required.</p>
             </div>
           </div>
         </section>
@@ -211,12 +215,17 @@ const HateSpeechDetection = () => {
           </div>
         </section>
         <section>
-          <SectionHeader number="03" title="System Architecture" subtitle="Layered component design" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ArchCard title="NLP Pipeline" icon={<Brain className="w-5 h-5"/>} items={["NLTK tokenization","Stopword removal","TF-IDF vectorization","LinearSVC inference"]} accent="primary"/>
-            <ArchCard title="Flask Backend" icon={<Shield className="w-5 h-5"/>} items={["REST API endpoints","SocketIO server","YouTube comment fetcher","Batch classification"]} accent="accent"/>
-            <ArchCard title="Chatroom" icon={<MessageSquare className="w-5 h-5"/>} items={["Real-time SocketIO","Message interception","AI rewriting","Broadcast moderation"]} accent="terminal"/>
-            <ArchCard title="YouTube Analyser" icon={<Youtube className="w-5 h-5"/>} items={["URL-based comment fetch","Batch toxicity scoring","Keyword highlighting","Per-comment results"]} accent="primary"/>
+          <SectionHeader number="03" title="System Architecture" subtitle="Classifier and chatroom moderation are separate code paths" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <ArchCard title="Text Cleaning" icon={<Code className="w-5 h-5"/>} items={["Lowercase normalization","URL and mention removal","Alphabetic character filtering","Whitespace normalization"]} accent="primary"/>
+            <ArchCard title="Feature Pipeline" icon={<Brain className="w-5 h-5"/>} items={["English stop-word filtering","Word unigrams and bigrams","5,000 TF-IDF features","LinearSVC inference"]} accent="accent"/>
+            <ArchCard title="Flask Interfaces" icon={<Shield className="w-5 h-5"/>} items={["YouTube comment fetcher","Batch classification","JSON and template responses","Saved model artifacts"]} accent="primary"/>
+            <ArchCard title="Chatroom Rules" icon={<MessageSquare className="w-5 h-5"/>} items={["Flask-SocketIO transport","VADER sentiment signal","Phrase-pattern checks","Polite term suggestions"]} accent="terminal"/>
+            <ArchCard title="YouTube Analyser" icon={<Youtube className="w-5 h-5"/>} items={["URL-based comment fetch","Three-label breakdown","Derived risk indicators","Per-comment results"]} accent="primary"/>
+            <ArchCard title="Human Review" icon={<Shield className="w-5 h-5"/>} items={["Inspect model label","Review flagged wording","Consider conversation context","Make final moderation decision"]} accent="accent"/>
+          </div>
+          <div className="mt-6 rounded-xl border border-border bg-card p-5 font-mono text-xs md:text-sm text-muted-foreground overflow-x-auto">
+            User Input → Cleaning → TF-IDF → LinearSVC → <span className="text-primary">positive / neutral / negative</span> → Flask Response
           </div>
         </section>
         <section>
@@ -233,8 +242,19 @@ const HateSpeechDetection = () => {
                 <Zap className="w-8 h-8 text-accent flex-shrink-0"/>
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">TF-IDF + LinearSVC Results</h3>
-                  <p className="text-muted-foreground mt-2">Evaluated on 6,424 test samples with balanced class distribution.</p>
+                  <p className="text-muted-foreground mt-2">Evaluated on a stratified 20% holdout from the committed three-class CSV.</p>
                 </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4 mt-4 text-center text-sm">
+                {[{label:"Positive",value:"2,189"},{label:"Neutral",value:"2,063"},{label:"Negative",value:"2,172"}].map(item=>(
+                  <div key={item.label} className="rounded-lg border border-border p-3">
+                    <div className="font-mono text-foreground">{item.value}</div>
+                    <div className="mt-1 text-xs text-muted-foreground">{item.label} support</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 rounded-lg border border-warning/20 bg-warning/5 p-4 text-sm text-muted-foreground">
+                <span className="font-semibold text-warning">Evidence gap:</span> the repository does not preserve a confusion-matrix artifact. The reported metrics can be reproduced from the training path, but this case study does not invent per-cell values.
               </div>
               <div className="grid grid-cols-3 gap-4 mt-4">
                 {[{label:"Accuracy",value:"78.5%"},{label:"Macro F1",value:"0.78"},{label:"Test Samples",value:"6,424"}].map(m=>(
@@ -294,7 +314,8 @@ const HateSpeechDetection = () => {
               <span className="font-mono text-xs text-primary uppercase tracking-wider">Final Statement</span>
             </div>
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "Hate Speech Detection is a moderation-assistance prototype combining a verified classifier with Flask interfaces while documenting dataset licensing, privacy, and human-review limitations."
+              "Comment Sentiment & Moderation Assistant demonstrates three-class NLP classification, lightweight Flask deployment, and
+              real-time moderation assistance while documenting evaluation scope, dataset uncertainty, and mandatory human review."
             </blockquote>
           </div>
         </section>
