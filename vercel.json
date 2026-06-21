@@ -1,5 +1,11 @@
 {
   "github": {
     "productionBranch": "vercel-deploy"
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
