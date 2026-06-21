@@ -126,7 +126,7 @@ const HateSpeechDetection = () => {
   const flowSteps = [
     { title: "Text Input", description: "User submits text, YouTube URL, or chatroom message" },
     { title: "Preprocessing", description: "NLTK tokenization → stopword removal → TF-IDF vectorization" },
-    { title: "Classification", description: "LinearSVC predicts hate/clean with confidence score" },
+    { title: "Classification", description: "LinearSVC predicts positive, neutral, or negative sentiment-style labels" },
     { title: "YouTube Pipeline", description: "youtube-comment-downloader fetches comments → batch classify → toxicity report" },
     { title: "Chatroom Moderation", description: "SocketIO intercepts message → classify → rewrite if toxic → broadcast polite version" },
     { title: "Response", description: "Result returned with label, confidence, and keyword highlights" },
@@ -136,7 +136,7 @@ const HateSpeechDetection = () => {
     { decision: "TF-IDF + LinearSVC over deep learning", reason: "Lightweight, fast inference, and interpretable — ideal for real-time moderation without GPU requirements" },
     { decision: "SocketIO for chatroom", reason: "Real-time bidirectional communication enables live message interception and rewriting without page reload" },
     { decision: "YouTube comment integration", reason: "Demonstrates real-world applicability — not just a toy classifier but a usable moderation tool" },
-    { decision: "Macro F1 as primary metric", reason: "Balanced evaluation across both classes prevents the model from ignoring the minority hate speech class" },
+    { decision: "Macro F1 alongside accuracy", reason: "Macro averaging gives each of the three sentiment-style labels equal weight and exposes class-specific weakness" },
   ];
 
   const limitations = [

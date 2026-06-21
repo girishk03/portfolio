@@ -8,7 +8,7 @@ const projects = [
     title: 'GlobalScart',
     description: 'Production-style FastAPI commerce backend with JWT authentication, RBAC, transactional checkout, PostgreSQL analytics, Docker, and CI.',
     image: '/projects/globalcart-360/globalscart/welcome.jpg',
-    technologies: ['FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'CI/CD'],
+    technologies: ['FastAPI', 'PostgreSQL', 'JWT', 'Docker', 'CI/CD'],
     category: 'Backend Systems',
     highlights: ['JWT authentication and role-based access', 'Transactional checkout and inventory handling', 'Render deployment configuration with GitHub Actions CI'],
     githubUrl: 'https://github.com/girishk03/GlobalScart',
