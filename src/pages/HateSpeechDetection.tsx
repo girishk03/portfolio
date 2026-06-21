@@ -166,10 +166,10 @@ const HateSpeechDetection = () => {
     { src: "/projects/hate-speech/04-comment-list.png", alt: "Comment List", caption: "fig.04 — Classified comment list with highlights", category: "RESULTS" },
     { src: "/projects/hate-speech/05-insights-panel.png", alt: "Insights Panel", caption: "fig.05 — Sentiment distribution and derived risk summary", category: "INSIGHTS", pair: true },
     { src: "/projects/hate-speech/06-insights-scans.png", alt: "Scans", caption: "fig.06 — Scan history and batch results", category: "INSIGHTS", pair: true },
-    { src: "/projects/hate-speech/07-chatroom-home.png", alt: "Chatroom Home", caption: "fig.07 — AI polite chatroom entry screen", category: "CHATROOM" },
+    { src: "/projects/hate-speech/07-chatroom-home.png", alt: "Chatroom Home", caption: "fig.07 — Rule-based chatroom assistant entry screen", category: "CHATROOM" },
     { src: "/projects/hate-speech/07-chatroom-result.png", alt: "Chatroom Result", caption: "fig.08 — Rule-based message flagging in the chatroom", category: "CHATROOM" },
-    { src: "/projects/hate-speech/08-chatroom-result.png", alt: "Chatroom Moderation", caption: "fig.09 — Moderated message rewritten as polite version", category: "CHATROOM" },
-    { src: "/projects/hate-speech/09-polite-conversion.png", alt: "Polite Conversion", caption: "fig.10 — AI polite conversion output", category: "CHATROOM" },
+    { src: "/projects/hate-speech/08-chatroom-result.png", alt: "Chatroom Moderation", caption: "fig.09 — Suggested alternative wording from phrase rules", category: "CHATROOM" },
+    { src: "/projects/hate-speech/09-polite-conversion.png", alt: "Polite Conversion", caption: "fig.10 — Rule-based term-replacement output", category: "CHATROOM" },
   ];
 
   return (
@@ -180,7 +180,7 @@ const HateSpeechDetection = () => {
       <header className="border-b border-border">
         <div className="container mx-auto px-6 py-24">
           <div className="max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Hate Speech Detection</h1>
+            <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Comment Sentiment & Moderation Assistant</h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
               Three-class sentiment-style text classifier with a YouTube comment-analysis interface and a separate
               rule-based SocketIO chatroom assistant. The classifier reports 78.50% accuracy and 0.7832 Macro F1 on a 6,424-record holdout.
@@ -204,7 +204,7 @@ const HateSpeechDetection = () => {
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <p className="text-lg text-foreground leading-relaxed">High-volume comment and chat systems need ways to prioritize potentially negative content without treating an automated prediction as a final moderation decision.</p>
-              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Hate Speech Detection</strong> combines a <span className="text-primary">three-class sentiment-style classifier</span> with <span className="text-accent"> rule-based SocketIO chatroom assistance</span> and a <span className="text-terminal"> YouTube comment-analysis interface</span>. It does not equate negative sentiment with hate speech, and human review remains required.</p>
+              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Comment Sentiment & Moderation Assistant</strong> combines a <span className="text-primary">three-class sentiment-style classifier</span> with <span className="text-accent"> rule-based SocketIO chatroom assistance</span> and a <span className="text-terminal"> YouTube comment-analysis interface</span>. It does not equate negative sentiment with hate speech, and human review remains required.</p>
             </div>
           </div>
         </section>
@@ -314,7 +314,7 @@ const HateSpeechDetection = () => {
               <span className="font-mono text-xs text-primary uppercase tracking-wider">Final Statement</span>
             </div>
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "Hate Speech Detection demonstrates three-class NLP classification, lightweight Flask deployment, and
+              "Comment Sentiment & Moderation Assistant demonstrates three-class NLP classification, lightweight Flask deployment, and
               real-time moderation assistance while documenting evaluation scope, dataset uncertainty, and mandatory human review."
             </blockquote>
           </div>
