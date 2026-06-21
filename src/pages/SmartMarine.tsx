@@ -116,7 +116,7 @@ const SmartMarine = () => {
   }, []);
 
   const objectives = [
-    "Build an auditable YOLOv8n-based prototype for marine-debris candidate detection",
+    "Build an auditable YOLOv8n prototype that flags selected COCO object classes as potential marine-debris candidates",
     "Document the limits of treating selected COCO object classes as debris proxies",
     "Implement FPS, p50/p95 latency benchmarks and stress testing",
     "Add structured logging with run_id, model_version, and config snapshots",
@@ -214,7 +214,7 @@ const SmartMarine = () => {
             <ArchCard title="Vision Pipeline" icon={<Eye className="w-5 h-5"/>} items={["OpenCV frame extraction","YOLOv8n inference","Candidate-class filtering","Bounding box output"]} accent="primary"/>
             <ArchCard title="Reliability Layer" icon={<Shield className="w-5 h-5"/>} items={["Retry/skip policy","Low-confidence warnings","Error counts in summary","Long-run stability"]} accent="accent"/>
             <ArchCard title="Observability" icon={<BarChart2 className="w-5 h-5"/>} items={["Structured logging","run_id + model_version","Config snapshots","JSON batch artifacts"]} accent="terminal"/>
-            <ArchCard title="Deployment" icon={<Cpu className="w-5 h-5"/>} items={["Streamlit multi-tab UI","Autonomous GPS simulation","pytest unit + integration","psutil memory tracking"]} accent="primary"/>
+            <ArchCard title="Deployment" icon={<Cpu className="w-5 h-5"/>} items={["Streamlit multi-tab UI","Software-only GPS vessel simulation","pytest unit + integration","psutil memory tracking"]} accent="primary"/>
           </div>
         </section>
         <section>
