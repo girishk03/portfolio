@@ -72,7 +72,7 @@ export const ProjectsSection = () => {
         <div className="max-w-3xl">
           <ScrollLinkedText as="h2" className="type-h2">Selected Projects</ScrollLinkedText>
           <ScrollLinkedText as="p" className="type-body mt-4">
-            Five production-style projects across backend engineering, optimization, NLP, analytics, and computer vision.
+            Five documented software engineering projects across backend systems, optimization, NLP, analytics, and computer vision.
           </ScrollLinkedText>
         </div>
         <div className="mt-10 grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">

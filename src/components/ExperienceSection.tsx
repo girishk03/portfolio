@@ -19,7 +19,7 @@ const experiences = [
     title: 'Independent Software Engineering Projects',
     company: 'Independent',
     period: '2024 - Present',
-    description: 'Built five production-style portfolio projects across backend engineering, NLP, computer vision, analytics, and constraint optimisation. Actively seeking entry-level Python Developer / Software Engineer roles.',
+    description: 'Built five software engineering projects spanning backend systems, optimization, NLP, analytics, and computer vision. Actively seeking entry-level Python Developer / Software Engineer roles.',
     highlights: ['Python', 'Machine Learning', 'FastAPI'],
   },
 ];
@@ -38,7 +38,7 @@ const education = [
     title: 'Diploma in ECE',
     company: 'Government Polytechnic Warangal',
     period: '2020 - 2023',
-    description: 'Completed Diploma in Electronics and Communication Engineering. CGPA: 7.19',
+    description: 'Completed Diploma in Electronics and Communication Engineering.',
     highlights: ['Electronics', 'Embedded Systems', 'Networking'],
   },
 ];
@@ -61,6 +61,14 @@ const certifications = [
   { name: 'Python Essentials 2', issuer: 'Cisco', year: '2023', pdfFile: 'Python Essentials 2.pdf' },
   { name: 'Networking Essentials', issuer: 'Cisco', year: '2023', pdfFile: 'Networking Essential.pdf' },
 ];
+
+const featuredCertificateNames = new Set([
+  'CCNA - Introduction to Networks',
+  'CCNA - Enterprise Networking',
+  'MongoDB Transactions',
+  'Python Essentials 1',
+  'Python Essentials 2',
+]);
 
 export const ExperienceSection = () => {
   const [certificatesOpen, setCertificatesOpen] = useState(false);
@@ -90,7 +98,8 @@ export const ExperienceSection = () => {
     });
   }, [certificateQuery, sortedCertifications]);
 
-  const marqueeCertifications = [...sortedCertifications, ...sortedCertifications];
+  const featuredCertifications = sortedCertifications.filter((cert) => featuredCertificateNames.has(cert.name));
+  const marqueeCertifications = [...featuredCertifications, ...featuredCertifications];
 
   return (
     <section id="experience" className="section-padding relative">
@@ -161,11 +170,11 @@ export const ExperienceSection = () => {
               <div className="flex flex-col items-center gap-4 mb-8 sm:flex-row sm:justify-between">
                 <h3 className="text-2xl font-semibold text-center flex items-center justify-center gap-3 sm:text-left">
                   <Award className="h-6 w-6 text-primary" />
-                  Certifications ({certifications.length})
+                  Featured Certifications
                 </h3>
                 <Dialog open={certificatesOpen} onOpenChange={setCertificatesOpen}>
                   <DialogTrigger asChild>
-                    <Button variant="heroOutline" size="sm">View All</Button>
+                    <Button variant="heroOutline" size="sm">View All ({certifications.length})</Button>
                   </DialogTrigger>
                   <DialogContent className="w-[calc(100vw-2rem)] max-w-5xl p-4 sm:p-6">
                     <DialogHeader>

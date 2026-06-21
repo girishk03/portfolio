@@ -7,7 +7,7 @@ const skillIcons: Record<string, LucideIcon> = {
   Python: Code2, TypeScript: Code2, JavaScript: Code2, SQL: Database, Bash: Code2,
   FastAPI: Server, Flask: Server, Docker: Server, Render: Server, 'GitHub Actions': Code2,
   'scikit-learn': Brain, YOLOv8: Target, 'OR-Tools': Brain, NLP: Brain, PyTorch: Brain, OpenCV: Target,
-  PostgreSQL: Database, Redis: Database, MySQL: Database, MongoDB: Database,
+  PostgreSQL: Database, MySQL: Database, MongoDB: Database,
   React: Globe, HTML: Globe, CSS: Palette, Git: Code2, GitHub: Code2,
   'Data Structures': Binary, Networking: Network,
 };
@@ -15,7 +15,7 @@ const skillIcons: Record<string, LucideIcon> = {
 const brandIcon: Record<string, string> = {
   Python: 'python', JavaScript: 'javascript', TypeScript: 'typescript',
   React: 'react', HTML: 'html5', CSS: 'css3', Git: 'git', GitHub: 'github',
-  MySQL: 'mysql', PostgreSQL: 'postgresql', MongoDB: 'mongodb', Redis: 'redis',
+  MySQL: 'mysql', PostgreSQL: 'postgresql', MongoDB: 'mongodb',
   Flask: 'flask', Docker: 'docker', PyTorch: 'pytorch', OpenCV: 'opencv', FastAPI: 'fastapi',
 };
 
@@ -33,7 +33,7 @@ const skillGroups = [
   { title: 'Languages', skills: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Bash'] },
   { title: 'Backend & Infra', skills: ['FastAPI', 'Flask', 'Docker', 'GitHub Actions', 'Render'] },
   { title: 'AI & ML', skills: ['scikit-learn', 'YOLOv8', 'PyTorch', 'OR-Tools', 'NLP', 'OpenCV'] },
-  { title: 'Databases', skills: ['PostgreSQL', 'Redis', 'MySQL', 'MongoDB'] },
+  { title: 'Databases', skills: ['PostgreSQL', 'MySQL', 'MongoDB'] },
   { title: 'Web & Tools', skills: ['React', 'HTML', 'CSS', 'Git', 'GitHub'] },
 ];
 
@@ -47,7 +47,7 @@ export const SkillsSection = () => {
             My<span className="gradient-text"> Tech Stack</span>
           </ScrollLinkedText>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Built through 5 deployed production systems across backend, ML, and data engineering
+            Built through five documented projects across backend systems, optimization, NLP, analytics, and computer vision
           </p>
         </div>
         <ScrollReveal delay={0.2}>
