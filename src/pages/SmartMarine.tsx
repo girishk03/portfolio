@@ -116,7 +116,7 @@ const SmartMarine = () => {
   }, []);
 
   const objectives = [
-    "Build an auditable YOLOv8n prototype that flags selected COCO object classes as potential marine-debris candidates",
+    "Build an auditable YOLOv8n-based prototype that flags selected COCO object classes as potential marine-debris candidates",
     "Document the limits of treating selected COCO object classes as debris proxies",
     "Implement FPS, p50/p95 latency benchmarks and stress testing",
     "Add structured logging with run_id, model_version, and config snapshots",
