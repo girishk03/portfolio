@@ -6,7 +6,7 @@ const projects = [
   {
     id: 1,
     title: 'GlobalScart',
-    description: 'Production-style FastAPI commerce backend with JWT authentication, RBAC, transactional checkout, PostgreSQL analytics, Docker, and CI.',
+    description: 'FastAPI commerce backend with JWT authentication, RBAC, transactional checkout, PostgreSQL analytics, Docker, and CI.',
     image: '/projects/globalcart-360/globalscart/welcome.jpg',
     technologies: ['FastAPI', 'PostgreSQL', 'JWT', 'Docker', 'CI/CD'],
     category: 'Backend Systems',

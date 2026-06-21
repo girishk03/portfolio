@@ -1,7 +1,7 @@
 import { Braces, Boxes, Container, GraduationCap, Server } from 'lucide-react';
 
 const highlights = [
-  { icon: Boxes, value: '5', label: 'Production-style projects' },
+  { icon: Boxes, value: '5', label: 'Documented projects' },
   { icon: Server, value: 'FastAPI', label: 'Backend and API focus' },
   { icon: Braces, value: 'PostgreSQL', label: 'Transactional data systems' },
   { icon: Container, value: 'Docker + CI', label: 'Tested delivery workflows' },

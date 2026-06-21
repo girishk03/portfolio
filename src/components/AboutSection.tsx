@@ -6,7 +6,7 @@ const highlights = [
   { icon: Code2, title: 'Backend Engineering', description: 'FastAPI, Flask, PostgreSQL, JWT, RBAC' },
   { icon: Zap, title: 'API Development', description: 'REST APIs, validation, testing, and error handling' },
   { icon: Brain, title: 'Optimization Systems', description: 'OR-Tools CP-SAT, LNS, and constraint validation' },
-  { icon: Database, title: '5 Portfolio Projects', description: 'Backend, optimization, NLP, analytics, and CV' },
+  { icon: Database, title: '5 Documented Projects', description: 'Backend systems, optimization, NLP, analytics, and CV' },
 ];
 
 export const AboutSection = () => {

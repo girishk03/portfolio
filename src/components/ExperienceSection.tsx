@@ -99,7 +99,6 @@ export const ExperienceSection = () => {
   }, [certificateQuery, sortedCertifications]);
 
   const featuredCertifications = sortedCertifications.filter((cert) => featuredCertificateNames.has(cert.name));
-  const marqueeCertifications = [...featuredCertifications, ...featuredCertifications];
 
   return (
     <section id="experience" className="section-padding relative">
@@ -247,17 +246,15 @@ export const ExperienceSection = () => {
               </div>
             </div>
 
-            <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-              <div className="marquee [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-                <div className="marquee-track gap-4 pb-2 px-4 sm:px-6 lg:px-8" style={{ ['--marquee-duration' as never]: '45s' }}>
-                {marqueeCertifications.map((cert, index) => {
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                {featuredCertifications.map((cert) => {
                   const pdfHref = cert.pdfFile ? `/certificates/${encodeURIComponent(cert.pdfFile)}` : undefined;
                   const pdfPreviewHref = pdfHref ? `${pdfHref}#page=1&view=FitH` : undefined;
 
                   return (
                     <div
-                      key={`${cert.name}-${cert.pdfFile ?? cert.issuer}-${index}`}
-                      className="glass rounded-xl p-4 card-hover min-w-[220px] md:min-w-[240px] lg:min-w-[260px]"
+                      key={`${cert.name}-${cert.pdfFile ?? cert.issuer}`}
+                      className="glass rounded-xl p-4 card-hover"
                     >
                       {pdfPreviewHref && (
                         <div className="mb-4 overflow-hidden rounded-lg border border-border/50 bg-muted/20">
@@ -296,8 +293,6 @@ export const ExperienceSection = () => {
                     </div>
                   );
                 })}
-              </div>
-            </div>
             </div>
           </div>
         </ScrollReveal>
