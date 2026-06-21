@@ -6,11 +6,11 @@ const projects = [
   {
     id: 1,
     title: 'GlobalScart',
-    description: 'Production e-commerce backend with multi-vendor support, JWT auth, async order processing, and real-time inventory management. Deployed live on Render with full CI/CD pipeline.',
+    description: 'Production-style FastAPI commerce backend with JWT authentication, RBAC, transactional checkout, PostgreSQL analytics, Docker, and CI.',
     image: '/projects/globalcart-360/globalscart/welcome.jpg',
     technologies: ['FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'CI/CD'],
-    category: 'Backend Engineering',
-    highlights: ['Multi-vendor support with JWT authentication', 'Async order processing and real-time inventory', 'Deployed on Render with GitHub Actions CI/CD'],
+    category: 'Backend Systems',
+    highlights: ['JWT authentication and role-based access', 'Transactional checkout and inventory handling', 'Render deployment configuration with GitHub Actions CI'],
     githubUrl: 'https://github.com/girishk03/GlobalScart',
     liveUrl: 'https://globalscart.onrender.com',
     caseStudyUrl: '/project/globalcart-360',
@@ -18,11 +18,11 @@ const projects = [
   {
     id: 2,
     title: 'University Timetabling Solver',
-    description: 'Constraint Programming + Large Neighbourhood Search optimizer solving NP-hard university scheduling in under 2 seconds. FastAPI wrapper and live GitHub Pages dashboard.',
+    description: 'Constraint Programming + Large Neighbourhood Search optimizer with infeasibility diagnostics, hard-constraint validation, and a live GitHub Pages dashboard.',
     image: '/projects/timetabling/dashboard.jpeg',
     technologies: ['OR-Tools', 'CP-SAT', 'FastAPI', 'Python', 'LNS'],
-    category: 'Optimisation & Backend',
-    highlights: ['CP-SAT + LNS solving NP-hard scheduling in <2s', 'FastAPI wrapper with live API endpoint', 'GitHub Pages interactive dashboard'],
+    category: 'Optimization Engines',
+    highlights: ['Hybrid CP-SAT + LNS optimization', 'Infeasibility diagnostics and schedule validation', 'GitHub Pages interactive dashboard'],
     githubUrl: 'https://github.com/girishk03/University-Timetabling-Solver',
     liveUrl: 'https://girishk03.github.io/University-Timetabling-Solver/',
     caseStudyUrl: '/project/university-timetabling',
@@ -30,11 +30,11 @@ const projects = [
   {
     id: 3,
     title: 'Hate Speech Detection',
-    description: 'TF-IDF + LinearSVC classifier achieving 78.5% accuracy on 6,424 samples. Live YouTube comment analyser and AI polite chatroom with real-time SocketIO moderation.',
+    description: 'TF-IDF + LinearSVC classifier with verified evaluation artifacts, a YouTube comment-analysis interface, and SocketIO chatroom moderation assistance.',
     image: '/projects/hate-speech/07-chatroom-result.png',
     technologies: ['Flask', 'scikit-learn', 'NLP', 'SocketIO', 'TF-IDF'],
-    category: 'NLP & AI',
-    highlights: ['TF-IDF + LinearSVC, 78.5% accuracy on 6,424 samples', 'YouTube comment classifier with toxicity scoring', 'AI polite chatroom with real-time SocketIO moderation'],
+    category: 'Applied NLP',
+    highlights: ['TF-IDF + LinearSVC with documented evaluation', 'YouTube comment classifier with toxicity scoring', 'SocketIO moderation assistance with human-review limits'],
     githubUrl: 'https://github.com/girishk03/hate-speech-detection',
     liveUrl: 'https://hate-speech-detection-zqjy.onrender.com',
     caseStudyUrl: '/project/hate-speech-detection',
@@ -42,11 +42,11 @@ const projects = [
   {
     id: 4,
     title: 'Power Theft Detection',
-    description: 'Smart grid monitoring system comparing Random Forest, LSTM, and CNN-LSTM on smart meter data. Evaluation-focused reporting with ROC curves and confusion matrices. Live Flask dashboard.',
+    description: 'Flask dashboard using transparent heuristic risk scoring to prioritize electricity-consumption records for investigation.',
     image: '/projects/power-theft/dashboard.png',
-    technologies: ['Python', 'Random Forest', 'LSTM', 'CNN-LSTM', 'Flask'],
-    category: 'AI & Data Engineering',
-    highlights: ['Compared RF vs LSTM vs CNN-LSTM on smart meter data', 'Evaluation-focused: ROC curves, confusion matrices, AUC', 'Live Flask monitoring dashboard on Render'],
+    technologies: ['Python', 'Flask', 'Pandas', 'pytest', 'Docker'],
+    category: 'Data Analytics',
+    highlights: ['Transparent risk thresholds and documented score clamp', 'Real-data sample and API test coverage', 'Flask dashboard with Docker and CI validation'],
     githubUrl: 'https://github.com/girishk03/power-theft-detection-system',
     liveUrl: 'https://power-theft-detection-system.onrender.com',
     caseStudyUrl: '/project/power-theft-detection',
@@ -54,11 +54,11 @@ const projects = [
   {
     id: 5,
     title: 'Smart Marine AI',
-    description: 'YOLOv5-based marine debris detection achieving 92% accuracy. End-to-end pipeline with GPS-based autonomous collection simulation, FPS/latency benchmarking, stress testing via Streamlit.',
+    description: 'YOLOv8n and Streamlit prototype that flags selected container-like classes as possible debris candidates and includes software-only vessel simulation.',
     image: '/projects/smart-marine/smart-marine-01.png',
-    technologies: ['YOLOv5', 'PyTorch', 'Streamlit', 'OpenCV', 'psutil'],
+    technologies: ['YOLOv8n', 'PyTorch', 'Streamlit', 'OpenCV', 'pytest'],
     category: 'Computer Vision',
-    highlights: ['YOLOv5 debris detection, 92% accuracy', 'FPS + p50/p95/p99 latency benchmarks with stress mode', 'GPS-based autonomous collection simulation mode'],
+    highlights: ['Debris-proxy detection with explicit material limits', 'Qualified CPU timing observations and automated tests', 'Software-only GPS and collection simulation'],
     githubUrl: 'https://github.com/girishk03/smart_marine_project',
     liveUrl: null,
     caseStudyUrl: '/project/smart-marine',
@@ -72,7 +72,7 @@ export const ProjectsSection = () => {
         <div className="max-w-3xl">
           <ScrollLinkedText as="h2" className="type-h2">Selected Projects</ScrollLinkedText>
           <ScrollLinkedText as="p" className="type-body mt-4">
-            5 production systems — backend, ML, NLP, and computer vision, all deployed or fully documented.
+            Five production-style projects across backend engineering, optimization, NLP, analytics, and computer vision.
           </ScrollLinkedText>
         </div>
         <div className="mt-10 grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">

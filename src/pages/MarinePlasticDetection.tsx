@@ -36,10 +36,10 @@ const MarinePlasticDetection = () => {
   const features = [
     {
       icon: Target,
-      title: 'AI-Based Plastic Waste Detection (YOLOv5m)',
+      title: 'Marine-Debris Candidate Detection (YOLOv8n)',
       bullets: [
-        'Medium-scale YOLOv5 model adapted for marine debris detection',
-        'Confidence threshold tuning and class-specific boosting to reduce false positives in ocean environments',
+        'Pretrained YOLOv8n runtime with selected COCO container classes used as debris proxies',
+        'Confidence thresholds and heuristic filtering support operator review but do not classify material',
       ],
     },
     {
@@ -88,12 +88,12 @@ const MarinePlasticDetection = () => {
 
   const technologies: Record<string, Array<{ name: string; definition: string }>> = {
     'AI / Machine Learning': [
-      { name: 'YOLOv5m', definition: 'Object detection model for plastic waste identification' },
+      { name: 'YOLOv8n', definition: 'Runtime object detector for selected debris-proxy classes' },
       { name: 'PyTorch', definition: 'Model loading, inference, and confidence threshold tuning' },
       { name: 'OpenCV', definition: 'Video capture, frame extraction, and preprocessing' },
     ],
     'Application Layer': [
-      { name: 'Streamlit', definition: 'Interactive web interface for real-time and batch detection' },
+      { name: 'Streamlit', definition: 'Interactive web interface for webcam-assisted and batch detection' },
       { name: 'Custom CSS', definition: 'Dark, marine-themed UI styling' },
     ],
     'Backend & APIs': [
@@ -108,7 +108,7 @@ const MarinePlasticDetection = () => {
 
   const roles = [
     'Designed the complete system architecture and detection pipeline',
-    'Integrated YOLOv5m for marine plastic detection with configurable confidence thresholds',
+    'Integrated YOLOv8n candidate detection with configurable confidence thresholds',
     'Implemented simulated vessel movement and GPS-based collection logic for workflow validation',
     'Built a REST API using FastAPI for detection and system health checks',
     'Added benchmarking, stress testing, and structured logging for performance validation',
@@ -116,8 +116,8 @@ const MarinePlasticDetection = () => {
   ];
 
   const constraints = [
-    '~11–18 FPS on CPU-only systems at 640×640 resolution (demo / batch mode)',
-    'Real-time 30+ FPS requires GPU or optimized runtimes (ONNX / TensorRT)',
+    'Committed CPU timing observations range from roughly 11–19 FPS and recorded zero detections per frame',
+    'No supported GPU benchmark is included',
     'Detection quality depends on dataset quality and environmental conditions',
     'Designed as a research and academic prototype, not a production-ready autonomous system',
   ];
@@ -159,9 +159,9 @@ const MarinePlasticDetection = () => {
     {
       step: 2,
       icon: Target,
-      title: 'AI Detection with YOLOv5m',
+      title: 'Candidate Detection with YOLOv8n',
       description:
-        'The uploaded image is processed through the YOLOv5m model, which detects plastic waste and draws bounding boxes around each detected object with confidence scores (e.g., plastic: 0.72).',
+        'The uploaded image is processed through YOLOv8n. Selected COCO container classes are displayed as possible debris candidates; this does not classify material composition.',
       imageAlt: 'Detection result showing plastic bottle with 72% confidence bounding box',
       imageSrc: '/projects/smart-marine/smart-marine-02.png',
     },
@@ -170,7 +170,7 @@ const MarinePlasticDetection = () => {
       icon: Video,
       title: 'Live Webcam Detection',
       description:
-        'For real-time applications, the system processes webcam feeds frame-by-frame, detecting plastic objects with high accuracy (up to 95% confidence) in live video streams.',
+        'The browser webcam workflow processes frames and displays candidate detections. Confidence is not calibrated material probability, and results require human review.',
       imageAlt: 'Live webcam detection showing plastic bottle detected with 95% confidence',
       imageSrc: '/projects/smart-marine/smart-marine-03.png',
     },
@@ -214,15 +214,15 @@ const MarinePlasticDetection = () => {
                 Smart Marine Vessels for AI-Driven Plastic Clean-up
               </h1>
               <p className="text-lg text-muted-foreground max-w-3xl mb-6">
-                An AI-powered detection system using YOLOv5m to identify and visualize marine plastic waste. Features a
-                Streamlit web interface, autonomous vessel simulation, and REST API for integration.
+                A computer-vision prototype using YOLOv8n to flag container-like objects as possible marine-debris candidates. Features a
+                Streamlit interface, software-only vessel simulation, and experimental API components.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Badge variant="outline" className="text-xs border-border">
                   Python
                 </Badge>
                 <Badge variant="outline" className="text-xs border-border">
-                  YOLOv5
+                  YOLOv8n
                 </Badge>
                 <Badge variant="outline" className="text-xs border-border">
                   Streamlit
@@ -291,7 +291,7 @@ const MarinePlasticDetection = () => {
                     <div>
                       <div className="text-foreground">AI-Based Detection</div>
                       <ul className="mt-2 space-y-1">
-                        <li>Uses YOLOv5 (PyTorch) to detect plastic waste from drone recordings, live webcams, and batches</li>
+                        <li>Uses YOLOv8n to flag selected object classes as possible debris candidates from images, webcam input, and batches</li>
                         <li>Outputs bounding boxes with confidence scores for operator review</li>
                       </ul>
                     </div>
@@ -323,7 +323,7 @@ const MarinePlasticDetection = () => {
                       <ul className="mt-2 space-y-1">
                         <li>FastAPI REST API + Dockerized runtime for reproducible deployment</li>
                         <li>CPU mode supported for demos and batch analysis</li>
-                        <li>GPU and ONNX optimization paths documented for real-time requirements</li>
+                        <li>Future GPU and optimized-runtime paths documented without unsupported performance claims</li>
                       </ul>
                     </div>
                   </div>
@@ -427,7 +427,7 @@ const MarinePlasticDetection = () => {
             <SectionHeader icon={Cpu} title="System Architecture" />
             <img
               src="/projects/smart-marine/system-architecture-pipeline.png"
-              alt="System pipeline: Input → YOLOv5 Detection → Frame Processing → Process → Output Visualization"
+              alt="System pipeline: Input → YOLOv8n candidate detection → filtering → output visualization"
               className="w-full rounded-none border border-border"
             />
           </div>

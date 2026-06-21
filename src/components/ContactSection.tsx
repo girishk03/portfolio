@@ -62,8 +62,7 @@ export const ContactSection = () => {
               <span className="gradient-text"> Connect</span>
             </ScrollLinkedText>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Looking for Python Developer or Software Engineer opportunities. 
-              Open to collaborations and interesting projects.
+              Open to Software Engineer, Backend Engineer, and Python Developer opportunities.
             </p>
           </div>
         </ScrollReveal>
@@ -75,8 +74,7 @@ export const ContactSection = () => {
               <div>
                 <ScrollLinkedText as="h3" className="text-2xl font-semibold mb-6">Let's build something great together</ScrollLinkedText>
                 <p className="text-muted-foreground">
-                  I'm an entry-level developer passionate about AI, machine learning, and building 
-                  impactful solutions. Looking forward to contributing to innovative projects.
+                  I'm a Computer Science graduate focused on Python backend engineering. I'm looking for opportunities to contribute to APIs, backend services, data systems, testing, and reliable software delivery.
                 </p>
               </div>
 

@@ -1,22 +1,18 @@
 import { ArrowDown, FileText, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ParticleBackground } from './ParticleBackground';
 import { Typewriter } from './Typewriter';
 
 export const HeroSection = () => {
   const roles = [
-    'Backend Engineer',
-    'Python Developer',
-    'Machine Learning Engineer',
-    'FastAPI & PostgreSQL',
+    'Python Backend Engineer',
+    'FastAPI Developer',
+    'Backend Systems Builder',
+    'Software Engineer',
   ];
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <ParticleBackground />
-        <div className="absolute inset-0 bg-background/60" />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
 
       <div className="relative z-10 section-container w-full">
         <div className="mx-auto max-w-4xl text-center">

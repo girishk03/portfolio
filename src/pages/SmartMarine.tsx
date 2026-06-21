@@ -116,25 +116,25 @@ const SmartMarine = () => {
   }, []);
 
   const objectives = [
-    "Build a production-grade YOLOv5 inference pipeline for marine debris detection",
-    "Achieve 92% detection accuracy on drone and video footage",
+    "Build an auditable YOLOv8n-based prototype for marine-debris candidate detection",
+    "Document the limits of treating selected COCO object classes as debris proxies",
     "Implement FPS, p50/p95 latency benchmarks and stress testing",
     "Add structured logging with run_id, model_version, and config snapshots",
-    "Deploy via Dockerized FastAPI with reproducible runtime",
+    "Provide reproducible local and configured cloud startup paths",
     "Design retry/skip logic and low-confidence warning system for operator trust",
   ];
 
   const flowSteps = [
     { title: "Video / Drone Input", description: "Accepts drone footage, webcam streams, or file-based video inputs" },
     { title: "Frame Extraction (OpenCV)", description: "Extracts frames consistently and normalizes resolution and color format" },
-    { title: "YOLOv5 Inference", description: "Object detection outputs bounding boxes and confidence scores per frame" },
+    { title: "YOLOv8n Inference", description: "General-purpose object detection outputs candidate classes, boxes, and confidence scores" },
     { title: "Retry & Skip Logic", description: "Retries transient errors, skips persistently failing frames with counts in summary" },
     { title: "Low-Confidence Warning", description: "Flags uncertain detections to support operator review and trust" },
     { title: "Structured Logging & Output", description: "Records run_id, model_version, timestamps; writes per-frame JSON + batch summary artifacts" },
   ];
 
   const designDecisions = [
-    { decision: "YOLOv5 over newer architectures", reason: "Proven accuracy-speed tradeoff for CPU deployment; well-documented for custom dataset training and production use" },
+    { decision: "YOLOv8n runtime", reason: "Small pretrained runtime model with straightforward Ultralytics integration; historical YOLOv5m artifacts are documented separately" },
     { decision: "Retry/skip policy", reason: "Long-running video inference needs resilience — silent failures corrupt batch summaries without proper error handling" },
     { decision: "Structured logging with run_id", reason: "Traceability is non-negotiable for production systems; enables replay, debugging, and audit without re-running inference" },
     { decision: "Docker for deployment", reason: "Eliminates environment drift between development and deployment; ensures reproducible inference results" },
@@ -143,14 +143,14 @@ const SmartMarine = () => {
   const limitations = [
     "CPU throughput limited — high-resolution video reduces FPS below real-time",
     "Domain shift (lighting, water conditions, camera angle) can affect accuracy",
-    "No GPU acceleration — real-time 30+ FPS requires ONNX or TensorRT",
+    "No supported GPU benchmark is included",
     "No live data ingestion — batch file-based processing only",
     "Dataset size constrains generalization to unseen marine environments",
   ];
 
   const learnings = [
     "End-to-end computer vision pipeline from raw video to structured JSON artifacts",
-    "YOLOv5 fine-tuning and confidence threshold tuning for domain-specific detection",
+    "Object-detection integration and confidence-threshold experimentation",
     "Benchmarking discipline — FPS, p50/p95 latency, and memory tracking",
     "Production observability patterns — structured logging, run_id, config snapshots",
     "Docker deployment and reproducible ML runtime management",
@@ -160,7 +160,7 @@ const SmartMarine = () => {
   const evidence = [
     { src: "/projects/smart-marine/smart-marine-01.png", alt: "Landing Screen", caption: "fig.01 — System landing and title screen", category: "UI" },
     { src: "/projects/smart-marine/smart-marine-02.png", alt: "Upload UI", caption: "fig.02 — Video / image upload and inference interface", category: "INFERENCE" },
-    { src: "/projects/smart-marine/smart-marine-03.png", alt: "Detection Output", caption: "fig.03 — YOLOv5 detection output with bounding boxes", category: "DETECTION" },
+    { src: "/projects/smart-marine/smart-marine-03.png", alt: "Detection Output", caption: "fig.03 — Candidate detection output with bounding boxes", category: "DETECTION" },
     { src: "/projects/smart-marine/smart-marine-04.png", alt: "Video Detection", caption: "fig.04 — Frame-level detection on video footage", category: "DETECTION" },
     { src: "/projects/smart-marine/smart-marine-05.png", alt: "Analytics View", caption: "fig.05 — Analytics and batch reporting dashboard", category: "ANALYTICS" },
     { src: "/projects/smart-marine/smart-marine-06.png", alt: "Architecture", caption: "fig.06 — System architecture and pipeline overview", category: "ARCHITECTURE" },
@@ -176,10 +176,10 @@ const SmartMarine = () => {
           <div className="max-w-4xl">
             <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Smart Marine AI</h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-              YOLOv5-based marine debris detection achieving 92% accuracy. End-to-end pipeline with GPS-based autonomous collection simulation, FPS/latency benchmarking, stress testing, and structured logging via Streamlit.
+              YOLOv8n and Streamlit prototype that flags selected container-like COCO classes as possible marine-debris candidates, with qualified CPU timing observations and software-only vessel simulation.
             </p>
             <div className="flex flex-wrap gap-2 mt-10">
-              {["YOLOv5","PyTorch","Streamlit","OpenCV","psutil","pytest"].map(t=>(
+              {["YOLOv8n","PyTorch","Streamlit","OpenCV","psutil","pytest"].map(t=>(
                 <span key={t} className="font-mono text-xs text-muted-foreground px-3 py-1.5 rounded-full border border-border">{t}</span>
               ))}
             </div>
@@ -198,7 +198,7 @@ const SmartMarine = () => {
           <div className="max-w-3xl">
             <div className="rounded-xl border border-border bg-card p-8">
               <p className="text-lg text-foreground leading-relaxed">Manual marine plastic monitoring is slow, expensive, and hard to scale. Drone footage generates hours of video that no human team can review frame by frame.</p>
-              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Smart Marine AI</strong> was built to demonstrate a <span className="text-primary">production-grade inference pipeline</span> with <span className="text-accent"> real benchmarking and stress testing</span> and <span className="text-terminal"> structured observability</span> — not just a notebook with detection screenshots.</p>
+              <p className="text-muted-foreground mt-4 leading-relaxed"><strong className="text-foreground">Smart Marine AI</strong> demonstrates an <span className="text-primary">end-to-end computer-vision prototype</span> with <span className="text-accent"> qualified timing evidence</span>, explicit provenance gaps, and <span className="text-terminal"> human-review safeguards</span>.</p>
             </div>
           </div>
         </section>
@@ -211,7 +211,7 @@ const SmartMarine = () => {
         <section>
           <SectionHeader number="03" title="System Architecture" subtitle="Layered pipeline design" />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ArchCard title="Vision Pipeline" icon={<Eye className="w-5 h-5"/>} items={["OpenCV frame extraction","YOLOv5 inference","Bounding box output","Confidence scoring"]} accent="primary"/>
+            <ArchCard title="Vision Pipeline" icon={<Eye className="w-5 h-5"/>} items={["OpenCV frame extraction","YOLOv8n inference","Candidate-class filtering","Bounding box output"]} accent="primary"/>
             <ArchCard title="Reliability Layer" icon={<Shield className="w-5 h-5"/>} items={["Retry/skip policy","Low-confidence warnings","Error counts in summary","Long-run stability"]} accent="accent"/>
             <ArchCard title="Observability" icon={<BarChart2 className="w-5 h-5"/>} items={["Structured logging","run_id + model_version","Config snapshots","JSON batch artifacts"]} accent="terminal"/>
             <ArchCard title="Deployment" icon={<Cpu className="w-5 h-5"/>} items={["Streamlit multi-tab UI","Autonomous GPS simulation","pytest unit + integration","psutil memory tracking"]} accent="primary"/>
@@ -235,14 +235,14 @@ const SmartMarine = () => {
                 </div>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[{label:"Accuracy",value:"92%"},{label:"Webcam FPS",value:"18.7"},{label:"Video p50",value:"86ms"},{label:"Stress Run",value:"Stable"}].map(m=>(
+                {[{label:"Observed CPU FPS",value:"10.8–18.7"},{label:"Mean Latency",value:"53–93ms"},{label:"GPU Evidence",value:"None"},{label:"Detection Metric",value:"Not validated"}].map(m=>(
                   <div key={m.label} className="rounded-lg border border-border bg-muted/10 p-4 text-center">
                     <div className="text-2xl font-bold text-primary">{m.value}</div>
                     <div className="text-xs text-muted-foreground mt-1">{m.label}</div>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground mt-4">Real-time 30+ FPS requires GPU acceleration or ONNX/TensorRT optimization.</p>
+              <p className="text-xs text-muted-foreground mt-4">These committed CPU reports recorded zero detections per frame and do not establish useful detection throughput or model accuracy.</p>
             </div>
           </div>
         </section>
@@ -281,7 +281,7 @@ const SmartMarine = () => {
               <span className="font-mono text-xs text-primary uppercase tracking-wider">Final Statement</span>
             </div>
             <blockquote className="text-xl md:text-2xl text-foreground font-light leading-relaxed">
-              "Smart Marine AI is not just a detection demo — it is a <span className="text-primary font-medium">production-grade inference system</span> with real benchmarks, stress testing, and structured observability built in from day one."
+              "Smart Marine AI is an honest computer-vision prototype: it demonstrates integration, filtering, analytics, and simulation while documenting missing weights, dataset provenance, and evaluation limits."
             </blockquote>
           </div>
         </section>

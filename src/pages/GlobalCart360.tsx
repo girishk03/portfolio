@@ -320,7 +320,7 @@ const GlobalCart360 = () => {
     },
     {
       decision: "Razorpay over dummy payments",
-      reason: "Real payment gateway integration demonstrates production-grade transaction handling",
+      reason: "Payment gateway integration demonstrates external-service handling and checkout state transitions",
     },
     {
       decision: "Modular service architecture",

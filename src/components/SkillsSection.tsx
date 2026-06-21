@@ -6,7 +6,7 @@ import { ScrollLinkedText } from './ScrollLinkedText';
 const skillIcons: Record<string, LucideIcon> = {
   Python: Code2, TypeScript: Code2, JavaScript: Code2, SQL: Database, Bash: Code2,
   FastAPI: Server, Flask: Server, Docker: Server, Render: Server, 'GitHub Actions': Code2,
-  'scikit-learn': Brain, YOLOv5: Target, 'OR-Tools': Brain, NLP: Brain, PyTorch: Brain, OpenCV: Target,
+  'scikit-learn': Brain, YOLOv8: Target, 'OR-Tools': Brain, NLP: Brain, PyTorch: Brain, OpenCV: Target,
   PostgreSQL: Database, Redis: Database, MySQL: Database, MongoDB: Database,
   React: Globe, HTML: Globe, CSS: Palette, Git: Code2, GitHub: Code2,
   'Data Structures': Binary, Networking: Network,
@@ -32,7 +32,7 @@ const SkillIcon = ({ name }: { name: string }) => {
 const skillGroups = [
   { title: 'Languages', skills: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Bash'] },
   { title: 'Backend & Infra', skills: ['FastAPI', 'Flask', 'Docker', 'GitHub Actions', 'Render'] },
-  { title: 'AI & ML', skills: ['scikit-learn', 'YOLOv5', 'PyTorch', 'OR-Tools', 'NLP', 'OpenCV'] },
+  { title: 'AI & ML', skills: ['scikit-learn', 'YOLOv8', 'PyTorch', 'OR-Tools', 'NLP', 'OpenCV'] },
   { title: 'Databases', skills: ['PostgreSQL', 'Redis', 'MySQL', 'MongoDB'] },
   { title: 'Web & Tools', skills: ['React', 'HTML', 'CSS', 'Git', 'GitHub'] },
 ];
